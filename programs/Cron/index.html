@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>Cron Tutorial, For Time-Based Job-Scheduling</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-bash.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/Programs/">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>Cron Tutorial</h1>
+        <div class="small-divider"></div>
+        <h4>For Time-Based Job-Scheduling</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/Cron.png"><img src="../../img/Cron.png" alt="Matrix"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Have you ever wanted to check for updates for that new database you wanted to keep up-to-date? Or maybe just a simple bash script you wanted to run every hour to make sure your computer is alive and well? Here, I present a succinct yet informative tutorial on how to set these up using cron in Unix-like environments.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Schedule programs to be run either hourly, daily, weekly, monthly, or even yearly.</li>
+              <li>Setup more interesting scripts that ensure the computer is not being overloaded or no processes going zombie.</li>
+              <li>Create scripts that email you and your team if something has gone awry.</li>
+            </ul>
+          </div>
+          <!--Download/Github-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td>
+                  <a href="zombiejobs.sh" title="Download ZombiePrograms.sh" class="button"><span class="glyphicon glyphicon-download-alt"></span> ZombiePrograms.sh</a>
+                </td>
+                <td>
+                  <a href="loadcheck.sh" title="Download LoadCheck.sh" class="button"><span class="glyphicon glyphicon-download-alt"></span> LoadCheck.sh</a>
+                </td>
+                <td>
+                  <a href="UpdateBlastDB.tar.gz" title="Download UpdateBlastDB.sh" class="button"><span class="glyphicon glyphicon-download-alt"></span> UpdateBlastDB.sh</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;A daemon is a background process which becomes active upon request. Because of this, daemons can take up very little processing power while being always ready. Now wouldn't it be useful if there existed a daemon which could execute a program, go to sleep for a specified amount of time, then repeat ad infinitum? Cron is a job scheduler written originally part of the Unix package, but now it has become standard in Linux distributions as well. Even Mac OS X utilizes cron, but launchd is preferred (and uses XML formatting). So installation on these operating systems shouldn't be necessary. But if you are a Windows/Cygwin user, check out: <a href="https://technet.microsoft.com/en-us/library/cc748993(v=ws.11).aspx">Windows Task Scheduler</a>(Win GUI), <a href="http://cronw.sourceforge.net/">cronw</a>(Win), or <a href="http://www.davidjnice.com/cygwin_cron_service.html">Vixie cron</a>(Cygwin). This tutorial will be using the terminal so be prepared. Let's get started.</p>
+            <p>&emsp;&emsp;&emsp;Open up your terminal and type in <strong>crontab -e</strong>. If the command is not recognized, ensure cron is installed and that it is running (<strong>ps -e | grep cron</strong> should show something). At this point, if you've never set this up before, there will be a prompt to choose which text editor to use. If you're a pro and a masochist, use vim, else use the layman's nano which should be recommended. Now you'll see the glorious commented out help info.</p>
+            <div class="terminal">
+              <ol>
+                <li><span class="prompt"></span>crontab -e</li>
+                <li>no crontab for user - using an empty one</li>
+                <li></li>
+                <li>Select an editor. To change later, run 'select-editor'.
+                <li>&nbsp;&nbsp;1.&nbsp;&nbsp;/bin/ed</li>
+                <li>&nbsp;&nbsp;2.&nbsp;&nbsp;/bin/nano&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<---- easiest</li>
+                <li>&nbsp;&nbsp;3.&nbsp;&nbsp;/usr/bin/vim.basic</li>
+                <li>&nbsp;&nbsp;4.&nbsp;&nbsp;/usr/bin/vim.tiny</li>
+                <li>Choose 1-4 [2]: 2<li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Let's break it down. At the bottom of the help info is: "m h  dom mon dow   command". The instructions say what these are but here's for memory's sake.</p>
+            <ul>
+              <li>m   - minute:       What minute the command will be run on [0-59].</li>
+              <li>h   - hour:         What hour the command will be run on [0-23] (military time - so 0 is midnight).</li>
+              <li>dom - day of month: What day of the month the command will be run on [1-31] (some months have different amounts of days so be weary).</li>
+              <li>mon - month:        What month the command will be run on [1-12 OR JAN-DEC].</li>
+              <li>dow - day of week:  What day of the week the command will be run on [0-6 OR SUN-SAT] (0 = Sunday, 1 = Monday, etc.).</li>
+            </ul>
+            <p>&emsp;&emsp;&emsp;If you leave a star in any of these categories, cron will ignore the specification. Here's some examples for your cognitive pleasure.</p>
+            <table>
+              <tr>
+                <th><strong>Expression</strong></th>
+                <th><strong>Command</strong></th>
+              </tr>
+              <tr>
+                <td>*&nbsp;10&nbsp;*&nbsp;*&nbsp;*</td>
+                <td>echo "This will be run every day at 10AM."</td>
+              </tr>
+              <tr>
+                <td>30&nbsp;10&nbsp;*&nbsp;*&nbsp;*</td>
+                <td>echo "This will be run every day at 10:30AM."</td>
+              </tr>
+              <tr>
+                <td>30&nbsp;*&nbsp;*&nbsp;*&nbsp;*</td>
+                <td>echo "This will be run every hour at the middle of an hour."</td>
+              </tr>
+              <tr>
+                <td>*&nbsp;*&nbsp;1&nbsp;JAN&nbsp;*</td>
+                <td>echo "This will be run every year at January 1st at midnight."</td>
+              </tr>
+              <tr>
+                <td>*&nbsp;21&nbsp;*&nbsp;*&nbsp;5</td>
+                <td>echo "This will be run every Friday at 9PM."</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;All cron's are equally good, but some are more equally good than others. Later versions of cron allow for much more flexibility in timing. Before if you wanted something ran every 15 minutes, you'd have to make 4 entries into the cron tab with only the 'm' flag changed to 0, 15, 30, and 45. In Vixie cron (which is so popular you may be using it as we speak), features such as lists and ranges were added. Some allow for other non standard characters (such as the Quartz java scheduler) for indicating times like the last Friday of a month. And some add more time specifications like adding columns for seconds and years. For the sake of completeness, here's more examples of these cool features, followed by everyone's favourite: more examples.</p>
+            <ul>
+              <li>, - comma: used to separate items within a list.</li>
+              <li>- - hyphen: used to indicate a range between two end points.</li>
+              <li>% - percent: when used in the command and if not backslashed, will act as a newline character.</li>
+              <li># - octomorph: used in "dow" which is then followed by a number between 1 to 5; indicates which nth weekday/weekend of the month (ex FRI#2 = 2nd Friday of the month).</li>
+              <li>? - question mark: either analogous to '*' for "dom" and "dow" or in other implementations gets substituted for the times the cron daemon was started.</li>
+              <li>/ - forward slash: used for step values</li>
+              <li>L - last: when used in "dow", used for last weekday/weekend of the month (ex last Friday); in "dom", last day of the month</li>
+              <li>W - weekday: used in "dom" to find the closest weekday (can go backwards or forwards to find nearest, but will stay within the month)</li>
+            </ul>
+            <table>
+              <tr>
+                <th><strong>Expression</strong></th>
+                <th><strong>Command</strong></th>
+              </tr>
+              <tr>
+                <td>*&nbsp;10&nbsp;*&nbsp;*&nbsp;MON,WED,FRI</td>
+                <td>echo "This will be run every Monday, Wednesday, and Friday at 10PM."</td>
+              </tr>
+              <tr>
+                <td>*&nbsp;10&nbsp;*&nbsp;*&nbsp;MON-THU</td>
+                <td>mail -s "Don't be late" me%This will be run Monday through at 10PM.</td>
+              </tr>
+              <tr>
+                <td>*&nbsp;9-12,14-17&nbsp;*&nbsp;*&nbsp;6#3</td>
+                <td>echo "This will be run every hour between 9AM-12PM and 2-5PM on the 3rd Friday."</td>
+              </tr>
+              <tr>
+                <td>*/15&nbsp;*&nbsp;L&nbsp;*&nbsp;*</td>
+                <td>echo "This will be run every 15 minutes on the last day of the month."</td>
+              </tr>
+              <tr>
+                <td>*/20&nbsp;14,23&nbsp;4W,L&nbsp;5-7&nbsp;?,2#1</td>
+                <td>echo "This will run every 20 minutes at 2PM and 11PM on the closest weekday from the 4th, the last day of the month, the days of the week that the cron daemon was started, and the first Monday for the months of May to July, you psycho."</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;So now we're ready to add some commands to be run. Say for example you were interested in ensuring that your server wasn't overloaded, and you wish to be informed if this happened. This could indicate some attacker spamming requests which your lowly server cannot handle. Here's some code:</p>
+            <div class="code" title="LoadCheck.sh">
+              <ol>
+                <li><span class="comment">#!/bin/bash</span></li>
+                <li><span class="comment">#Used to see if load is above maximum threshold</span>
+                <li></li>
+                <li>MAXLOAD=<span class="operator">$(cat /proc/cpuinfo | grep -c processor)</span></li>
+                <li>current=<span class="operator">$(cat /proc/loadavg | awk '{print $1}')</span></li>
+                <li></li>
+                <li>bool=<span class="operator">$(echo $current'>'$MAXLOAD | bc -l)</span></li>
+                <li><span class="keyword">if</span> <span class="operator">[</span> <span class="var">$bool</span> -gt <span class="num">1</span> <span class="operator">];</span> <span class="keyword">then</span></li>
+                <li>&emsp;&emsp;emails=<span class="operator">($(cat /path/to/emails/emails.txt))</span></li>
+                <li>&emsp;&emsp;output=<span class="string">"path/to/emails/emailLoad.txt"</span></li>
+                <li>&emsp;&emsp;<span class="keyword">echo</span> -e <span class="string">"Load is greater than maximum!\n\n"</span> <span class="operator">></span> <span class="var">$output</span></li>
+                <li>&emsp;&emsp;<span class="keyword">echo</span> -e <span class="string">"Current: $current\nMaximum: $MAXLOAD\n\n"</span> <span class="operator">>></span> <span class="var">$output</span></li>
+                <li>&emsp;&emsp;<span class="keyword">echo</span> <span class="string">"Please elucidate the problem at hand"</span> <span class="operator">>></span> <span class="var">$output</span></li>
+                <li>&emsp;&emsp;<span class="keyword">for</span> email <span class="keyword">in</span> <span class="var">${emails[@]}</span><span class="operator">;</span> <span class="keyword">do</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">cat</span> <span class="var">$output</span> <span class="operator">|</span> <span class="keyword">mail</span> -s <span class="string">"Server Load Over Maximum"</span> <span class="var">$email</span></li>
+                <li>&emsp;&emsp;<span class="keyword">done</span>
+                <li><span class="keyword">fi</span>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;I personally used to make a temporary file to dump all the text just to have a local copy for reference (and to see if it works when something goes awry). You can remove it automatically if you'd like. Also if you didn't realize, when I write "/path/to/???/", you should put the location of where these files exist yourself. Let's add this to the cron table.</p>
+            <div class="terminal">
+              <ol>
+                <li><span class="prompt"></span>crontab -e</li>
+                <li>#&nbsp;Edit this file to introduce tasks to be run by cron.</li>
+                <li>...</li>
+                <li>#&nbsp;m&nbsp;h&nbsp;&nbsp;dom&nbsp;mon&nbsp;dow&nbsp;&nbsp;&nbsp;command</li>
+                <li>*/15 * * * * bash /path/to/program/LoadCheck.sh</li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;If you're using nano, press CTRL+O then hit ENTER to write and CTRL+X to exit. And if you're using vim, you did this to yourself. Now we're done! Cron was made with the user in mind. As you can see what we wrote should execute every 15 minutes; of course you're free to change this to fit your personal whims. If you're curious to what other scripts I have my server unconsciously run, I wrote <a href="#">ZombiePrograms.sh</a> for checking 'zombie' jobs. They're not explicitly zombies (i.e. they don't show up as zombie when you run <strong>top</strong>), but seem to be stuck in a huge loop. And for bioinformatics people, there's <a href="#">UpdateBlastDB.sh</a> which you can use to run every day or every week.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <h3>Cron Tutorial</h3>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="#">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on August 2016</p>
+    <p>Thanks to <a href="http://kellyli.me/">Kelly Li</a> | <a href="http://wummel.github.io/">Wummel</a> | <a href="http://www.danielecook.com/">Daniel E. Cook</a> | <a href="http://www.w3schools.com/">w3schools</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>

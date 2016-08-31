@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>Matrix.cpp, A Linear Algebra Tool</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-cpp.css">
+  <link rel="stylesheet" href="../../css/matrix.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/Programs/">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>Matrix.cpp</h1>
+        <div class="small-divider"></div>
+        <h4>A Linear Algebra Tool</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/Matrix.png"><img src="../../img/Matrix.png" alt="Matrix"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;A simplistic C++ program which can perform rudimentary calculations regarding any sized matrix.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>A custom Fraction class for dealing with rational numbers (vs the loss in accuracy and volatility with using floating point numbers).</li>
+              <li>Gaussian-Jordan elimination to reduce any matrix into row-reduced echeleon form.</li>
+              <li>Efficient calculation of the four fundamental subspaces (null, row, column, and left null spaces).</li>
+              <li>Still to be implemented: determinant, characteristic polynomials, eigenvalues, Gram-Schmidt Procedure, Jordan-Canonical form, triangular forms, and possibly create an interactive and intuitive webpage UI.</li>
+            </ul>
+          </div>
+          <!--Download/Github-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td>
+                  <a href="Matrix.exe" title="Download Matrix.exe" class="button"><span class="glyphicon glyphicon-download-alt"></span> Matrix.exe</a>
+                </td>
+                <td>
+                  <a href="MatrixV1.0.zip" title="Download Matrix.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.zip</a>
+                </td>
+                <td>
+                  <a href="MatrixV1.0.tar.gz" title="Download Matrix.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.tar.gz</a>
+                </td>
+                <td>
+                  <a href="#" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Learning linear algebra is rewarding in a sense that this newfound knowledge is powerful for solving problems in many areas: physics, maths, and even business, but actually crunching the numbers becomes a pain in the ass. Especially frustrating for students is making a small error in the beginning of the process and having the entire answer skewed. Nowadays, these algorithms are automated by computers, so this is intended as an aid to quickly check one's answer. Say for example you are tasked with solving the following set of linear equations:</p>
+            <div class="lin-alg">
+              <p>x<sub>1</sub> + 2x<sub>2</sub> - 2x<sub>3</sub> + 9x<sub>4</sub> + 3x<sub>5</sub> - 5x<sub>6</sub> - 2x<sub>7</sub> + x<sub>8</sub> + 27x<sub>9</sub> = -5</p>
+              <p>2x<sub>1</sub> + 4x<sub>2</sub> + 3x<sub>3</sub> + 4x<sub>4</sub> - x<sub>5</sub> + 4x<sub>6</sub> + 10x<sub>7</sub> + 2x<sub>8</sub> - 23x<sub>9</sub> = 18</p>
+              <p>x<sub>1</sub> + 2x<sub>2</sub> + x<sub>3</sub> + 3x<sub>4</sub> + x<sub>5</sub> + x<sub>6</sub> + 5x<sub>7</sub> + 2x<sub>8</sub> - 7x<sub>9</sub> = 6</p>
+              <p>2x<sub>1</sub> + 4x<sub>2</sub> + 3x<sub>3</sub> + 4x<sub>4</sub> - 7x<sub>5</sub> + 2x<sub>6</sub> + 4x<sub>7</sub> - 11x<sub>9</sub> = 20</p>
+              <p>x<sub>1</sub> + 2x<sub>2</sub> + 5x<sub>4</sub> + 2x<sub>5</sub> - 4x<sub>6</sub> + 3x<sub>7</sub> + 8x<sub>8</sub> + 13x<sub>9</sub> = -4</p>
+              <p>-3x<sub>1</sub> - 6x<sub>2</sub> - x<sub>3</sub> - 13x<sub>4</sub> + 2x<sub>5</sub> - 5x<sub>6</sub> - 4x<sub>7</sub> + 13x<sub>8</sub> + 10x<sub>9</sub> = -29</p>
+            </div>
+            <p>&emsp;&emsp;&emsp;This is an except from the brilliantly written <a href="http://linear.ups.edu/jsmath/latest/fcla-jsmath-latest.html">"A First Course in Linear Algebra"</a> by Robert Beezer, which to those who have not learned linear algebra and wish to should definitely check out. As you can see solving this by hand would violate your rights as a human being and quite frankly would be a waste of your time (my record is an hour after corrections). But let's try doing it in a blink of an eye. To start, let us take the coefficient matrix and input them into a text file with entries delimited by spaces and equations by new lines. I put my file by the program; if you did not, you'll have to type out their absolute/relative locations.</p>
+            <table>
+              <tr>
+                <th><a href="../../img/MatrixInput.png"><img src="../../img/MatrixInput.png" alt="Input Matrix"></a></th>
+              </tr>
+              <tr>
+                <td class=".title">Coefficient matrix in Notepad</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;If you're wondering why I took the coefficients of the unknowns, I only needed to get the null space of that matrix to produce the *spoiler* infinite solutions needed. Then to get an answer for the linear system, take some linear combination of the basis vectors of the newly found null space and add it to an augmented solution vector. I'll show you what I mean later. Now run the program as so:</p>
+            <div class="terminal">
+              <ol>
+                <li><span class="prompt"></span>Matrix.exe test.txt output.txt</li>
+                <li></li>
+                <li><span class="prompt"></span></li>
+                <li></li>
+                <li></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Open the conveniently named output file (change the 2nd parameter if you want something different) and you will see the original matrix, the row reduced matrix, and the four fundamental subspaces. Mind the messy fraction parts and lack of any ASCII art to make this any bit palatable; I may remake this for a web browser for aesthetics. The nicety however is all entries are stated in fractional form, so if there is some rational number, it won't show up as some ugly decimal number (although it itself isn't quite the looker either).</p>
+            <table>
+              <tr>
+                <th><a href="../../img/MatrixOutput.png"><img src="../../img/MatrixOutput.png" alt="Matrix.exe Output"></a></th>
+                <th><a href="../../img/MatrixRepresentation.png"><img src="../../img/MatrixRepresentation.png" alt="Matrix.exe Representation" id="MatrixRepr"></a></th>
+                <th><a href="../../img/MatrixMeaning.png"><img src="../../img/MatrixMeaning.png"></a>
+              </tr>
+              <tr>
+                <td class="table-title">Output in Notepad</td>
+                <td class="table-title">How to interpret</td>
+                <td class="table-title">Finding solutions</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;Thus we can see that we can alter 5 different variables and add an augmented form of the solution vector to retrieve our desired solutions (implies nullity of 5). If you are interested in learning more about linear algebra or wish to brush up on it, please look at <a href="http://linear.ups.edu/jsmath/latest/fcla-jsmath-latest.html">"A First Course in Linear Algebra"</a> for the math bits, while for a visual interpretation look at <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown's Youtube video series</a>. Both are highly recommended (source: Me).</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <h3>Matrix.cpp</h3>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="#">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on August 2016</p>
+    <p>Thanks to <a href="http://kellyli.me/">Kelly Li</a> | <a href="http://wummel.github.io/">Wummel</a> | <a href="http://www.danielecook.com/">Daniel E. Cook</a> | <a href="http://www.w3schools.com/">w3schools</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+.navbar {
+  border: 0;
+  border-radius: 0;
+  padding: 15px 0px;
+  margin-bottom: 0;
+}
+.navbar-nav  li a:hover {
+  color: #1abc9c !important;
+}
+header .row {
+  padding: 20px;
+}
+header img {
+  display: block;
+  margin: 0px auto;
+  max-width: 250px;
+}
+header.about img{
+  padding: 55px 0px;
+}
+.bg-header {
+  background-color: #1abc9c; /* Turquoise */
+  color: #ffffff;
+}
+.bg-python {
+  /*background-color: #4aa02c;*/
+  background: rgba(74, 160, 44, 0.9); /* Spring Green, 0.9 opacity */
+  color: #ffffff;
+}
+.bg-vba {
+  /*background-color: #6c2dc7;*/
+  background: rgba(108, 45, 199, 0.9); /* Purple Amethyst, 0.9 opacity */
+  color: #ffffff;
+}
+.bg-cpp {
+  /*background-color: #fff380;*/
+  background: rgba(255, 243, 128, 0.9); /* Corn Yellow, 0.9 opacity */
+  color: #000000;
+}
+.bg-bash {
+  /*background-color: #3d3c3a;*/
+  background: rgba(61, 60, 58, 0.9); /* Iridium, 0.9 opacity */
+  color: #ffffff;
+}
+.divider {
+  height: 1px;
+  margin: 10px 0px;
+  background-color: #000000;
+}
+img {
+  width: 100%;
+  padding: 0px 10px;
+  vertical-align: center;
+}
+.program-container {
+  background-color: #272822;
+  background-image: url("../img/ProgramBackground.png");
+  background-repeat: repeat-y;
+  margin-bottom: 10px;
+  padding: 50px 30px;
+}
+.prog-style {
+  border: 2px solid #f8f8f8;
+  border-radius: 15px;
+  background: rgba(64, 64, 64, 1); /* Light Grey, 1 opacity */
+  color: #ffffff;
+}
+.prog-title {
+  text-align: center;
+  width: 260px;
+}
+.prog-title p {
+  color: #d1d0ce;
+  font-size 11px;
+}
+.main-container {
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  text-align: left;
+}
+.bg-python {
+  /*background-color: #4aa02c;*/
+  background: rgba(74, 160, 44, 0.9); /* Spring Green, 0.9 opacity */
+  color: #ffffff;
+}
+.bg-vbs {
+  /*background-color: #6c2dc7;*/
+  background: rgba(108, 45, 199, 0.9); /* Purple Amethyst, 0.9 opacity */
+  color: #ffffff;
+}
+.bg-cpp {
+  /*background-color: #fff380;*/
+  background: rgba(255, 243, 128, 0.9); /* Corn Yellow, 0.9 opacity */
+  color: #000000;
+}
+.bg-bash {
+  /*background-color: #3d3c3a;*/
+  background: rgba(61, 60, 58, 0.9); /* Iridium, 0.9 opacity */
+  color: #ffffff;
+}
+.picture img {
+  padding: 10px;
+}
+.text p {
+  padding-bottom: 30px;
+}
+.btn-view {
+  background-color: transparent;
+  border-radius: 7px;
+  border-style: solid;
+  border-width: 2px;
+  position: absolute;
+  width: 100px;
+}
+.btn-wrapper {
+  text-align: center;
+}
+#SeeMore {
+  padding: 10px;
+}
+footer {
+  padding-top: 10px;
+  font-size: 11px;
+  background-color: #f8f8f8;
+  text-align: center;
+}

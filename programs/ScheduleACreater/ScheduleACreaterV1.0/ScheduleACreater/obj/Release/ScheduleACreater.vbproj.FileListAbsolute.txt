@@ -1,0 +1,11 @@
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ResolveAssemblyReference.cache
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.Form1.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.Resources.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.vbproj.GenerateResource.Cache
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Release\ScheduleACreater.exe
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Release\ScheduleACreater.pdb
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Release\ScheduleACreater.xml
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Release\itextsharp.dll
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.exe
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.xml
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Release\ScheduleACreater.pdb

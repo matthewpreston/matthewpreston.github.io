@@ -1,0 +1,46 @@
+body {
+  background-color: #585858;
+}
+article .title {
+  background-color: #4aa02c;
+  color: #ffffff;
+}
+article .small-divider {
+  background-color: #ffffff;
+}
+article .divider {
+  background-color: #000000;
+}
+.outer-border {
+  background-color: #585858;
+  border-color: #4aa02c;
+}
+.inner-border {
+  background-color: #c3fdb8;
+  border-color: #4aa02c;
+}
+#download .button {
+  border-color: #4aa02c;
+}
+.sidebar .divider {
+  background-color: #000000;
+}
+.sidebar li a:hover {
+  background-color: #c3fdb8;
+}
+.sidebar li.active a{
+  color: #ffffff;
+  background-color: #4aa02c;
+}
+aside .button {
+  border-color: #4aa02c;
+}
+aside .button:hover {
+  background-color: #c3fdb8;
+}
+aside .round-button {
+  border-color: #4aa02c;
+}
+aside .round-button:hover {
+  background-color: #c3fdb8;
+}

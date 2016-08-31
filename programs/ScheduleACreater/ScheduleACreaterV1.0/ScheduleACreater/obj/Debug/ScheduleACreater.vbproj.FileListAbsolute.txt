@@ -1,0 +1,14 @@
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.Resources.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.vbproj.GenerateResource.Cache
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Debug\ScheduleACreater.exe
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Debug\ScheduleACreater.pdb
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Debug\ScheduleACreater.xml
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\bin\Debug\itextsharp.dll
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.exe
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.xml
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.pdb
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.FormMain.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.FormAddOpt.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.FormEditOpt.resources
+C:\Users\owner\Documents\Visual Studio 2008\Projects\ScheduleACreater\ScheduleACreater\obj\Debug\ScheduleACreater.FormAddCat.resources
