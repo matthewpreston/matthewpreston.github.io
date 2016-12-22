@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>Electrophoresis.R Molecular Weight Interpolation of Bands</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-r.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>Electrophoresis.R</h1>
+        <div class="small-divider"></div>
+        <h4>Molecular Weight Interpolation of Bands</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/GelInterpolated.png"><img src="../../img/GelInterpolated.png" alt="Interpolated Gel"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Electrophoresis.R is an R script for quickly compiling the molecular weights of unknown bands from a gel electrophoresis into a presentable figure. It elucidates the exponential regression equation from provided molecular weight ladder data and from this, plots the appropriate interpolated weight for each band. Additionally, bands can be clustered by lanes, allowing for a colourful comparison.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Simply structured input files for both the molecular ladder and unknown bands</li>
+              <li>Exponential regression of the molecular ladder for interpolation</li>
+              <li>Creation of a paper-presentable figure, with lanes clearly labelled with an appropriate legend</li>
+              <li>Pretty rainbow colour scheme</li>
+            </ul>
+          </div>
+          <!--Download/Github/Dependencies-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td><a href="Electrophoresis.zip" title="Download Electrophoresis.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Electrophoresis.zip</a></td>
+                <td><a href="Electrophoresis.tar.gz" title="Download Electrophoresis.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Electrophoresis.tar.gz</a></td>
+                <td><a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs/Electrophoresis" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Being in a biochemistry major, I was forced to take a basic lab course which introduced elementary lab techniques. Pipetting, buffer concepts, Michaelis-Menten kinetics, PCR, and the (boring) list continues. Their usefulness however is not to be underestimated. The only dreadful component was compiling lab reports, which for me was composed of a whopping 20 pages average. And this had to be done for every unit (five in total). So when it came to labelling interpolation lines in Excel for my figures, I found I have had enough. "Time to whip out my programming knowledge!", I said naively. Pretty sure it longer to write this script, but for those future electrophoresis experiments, it was brain dead to run this.</p>
+            <table>
+              <tr>
+                <th><a href="../../img/Gel.png"><img src="../../img/Gel.png" alt="Gel"></a></th>
+                <th><a href="../../img/GelInterpolated.png"><img src="../../img/GelInterpolated.png" alt="Interpolated Bands"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">My (successful) SDS PAGE gel</td>
+                <td class="table-title">Resulting figure</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;Firstly, take a look at the example input files. The first one, <a href="#">MolecularWeightLadder.csv</a>, is comma separated. Hopefully the header line should be informative enough with R<sub>f</sub> first, comma, and molecular weight. Note that you may have to change some parts of the script if you want it in different units, a different title, axes labels, etc. Currently the default weight is in Daltons. The second one, <a href=#>Lanes.txt</a> is somewhat comma delimited. First 'column' is what the lane contains (i.e. an appropriate label), followed by comma separated R<sub>f</sub> values. Run the script as follows:</p>
+            <div class="terminal">
+              <ol>
+                <li><span class="prompt">TODO</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;And presto! Feel free to dig into the script if you don't like some of the graphical parameters. Hopefully I've commented enough to give a rough idea on what to change. Yell at me if need be.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <h3>Electrophoresis.R</h3>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on August 2016</p>
+    <p>Thanks to <a href="http://kellyli.me/">Kelly Li</a> | <a href="http://wummel.github.io/">Wummel</a> | <a href="http://www.danielecook.com/">Daniel E. Cook</a> | <a href="http://www.w3schools.com/">w3schools</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>
