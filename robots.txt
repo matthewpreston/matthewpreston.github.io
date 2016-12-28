@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://matthewpreston.github.io/sitemap.xml
+Sitemap: https://matthewpreston.github.io/sitemap.txt
