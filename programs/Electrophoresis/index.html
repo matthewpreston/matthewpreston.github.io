@@ -55,7 +55,7 @@
         <div class="inner-border">
           <!--Presentation Image-->
           <div class="main-img">
-            <a href="../../img/GelInterpolated.png"><img src="../../img/GelInterpolated.png" alt="Interpolated Gel"></a>
+            <a href="../../img/Molecular Weight Interpolation SDS PAGE.png"><img src="../../img/Molecular Weight Interpolation SDS PAGE.png" alt="Interpolated Gel"></a>
           </div>
           <!--Introduction-->
           <div class="container-fluid" id="introduction">
@@ -93,21 +93,30 @@
             <p>&emsp;&emsp;&emsp;Being in a biochemistry major, I was forced to take a basic lab course which introduced elementary lab techniques. Pipetting, buffer concepts, Michaelis-Menten kinetics, PCR, and the (boring) list continues. Their usefulness however is not to be underestimated. The only dreadful component was compiling lab reports, which for me was composed of a whopping 20 pages average. And this had to be done for every unit (five in total). So when it came to labelling interpolation lines in Excel for my figures, I found I have had enough. "Time to whip out my programming knowledge!", I said naively. Pretty sure it longer to write this script, but for those future electrophoresis experiments, it was brain dead to run this.</p>
             <table>
               <tr>
-                <th><a href="../../img/Gel.png"><img src="../../img/Gel.png" alt="Gel"></a></th>
-                <th><a href="../../img/GelInterpolated.png"><img src="../../img/GelInterpolated.png" alt="Interpolated Bands"></a></th>
+                <th><a href="../../img/RE Digest Katia, Aria 2.png"><img src="../../img/RE Digest Katia, Aria 2.png" alt="Restriction Enzyme Gel"></a></th>
+                <th><a href="../../img/Molecular Weight Interpolation RE.png"><img src="../../img/Molecular Weight Interpolation RE.png" alt="Interpolated Bands"></a></th>
               </tr>
               <tr>
-                <td class="table-title">My (successful) SDS PAGE gel</td>
+                <td class="table-title">The (thankfully successful) gel</td>
                 <td class="table-title">Resulting figure</td>
               </tr>
             </table>
-            <p>&emsp;&emsp;&emsp;Firstly, take a look at the example input files. The first one, <a href="#">MolecularWeightLadder.csv</a>, is comma separated. Hopefully the header line should be informative enough with R<sub>f</sub> first, comma, and molecular weight. Note that you may have to change some parts of the script if you want it in different units, a different title, axes labels, etc. Currently the default weight is in Daltons. The second one, <a href=#>Lanes.txt</a> is somewhat comma delimited. First 'column' is what the lane contains (i.e. an appropriate label), followed by comma separated R<sub>f</sub> values. Run the script as follows:</p>
+            <p>&emsp;&emsp;&emsp;Firstly, take a look at the example input files. The first one, <a href="Examples/MolecularWeightLadder_RE.csv">MolecularWeightLadder_RE.csv</a>, is comma separated. Hopefully the header line should be informative enough with R<sub>f</sub> first, comma, and molecular weight. The second one, <a href="Examples/Lanes_RE.txt">Lanes_RE.txt</a> is somewhat comma delimited. First 'column' is what the lane contains (i.e. an appropriate label), followed by comma separated R<sub>f</sub> values. Run the script as follows:</p>
             <div class="terminal">
               <ol>
-                <li><span class="prompt">TODO</span></li>
+                <li><span class="prompt"></span>./Electrophoresis.R \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;--main="Interpolation of Molecular Weights from Standard Molecular Weight Ladder on Agarose Gel" \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;--subtitle="(0.7% gel, 150V, 60 minutes)" \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;--y_label="Molecular Weight (bp)" \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;--height=700 \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;--output="Molecular Weight Interpolation RE.png" \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;MolecularWeightLadder_RE.csv \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;Lanes_RE.txt</li>
+                <li></li>
+                <li><span class="prompt"></span></li>
               </ol>
             </div>
-            <p>&emsp;&emsp;&emsp;And presto! Feel free to dig into the script if you don't like some of the graphical parameters. Hopefully I've commented enough to give a rough idea on what to change. Yell at me if need be.</p>
+            <p>&emsp;&emsp;&emsp;And presto! Notice that just using one restriction enzyme alone led to the same band, implying that there is either one or no sites to cleave at. This nicely shows up as a multicoloured line in the plot. Some other overlaps occur, such as the dark blue and pink line (EcoRI + AvaI and EcoRI + ScaI + AvaI respectively) at R<sub>f</sub> = ~0.72, meaning that this section of DNA was not cleaved by ScaI. If you're observant enough, you'd expect one more band in the EcoRI + ScaI digest (as well as in the triple digest), but this band was so small (and such a small concentration), it couldn't be visualized at ~300bp. Feel free to dig into the script if you don't like some of the graphical parameters. Hopefully I've commented enough to give a rough idea on what to change. Yell at me if need be.</p>
           </div>
         </div>
       </div>

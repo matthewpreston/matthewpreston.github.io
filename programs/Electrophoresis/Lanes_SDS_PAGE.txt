@@ -1,0 +1,8 @@
+Lane Components,Rf Value1,Rf Value2,... (Each lane occupies one line)
+Casein from Ion Exchange,0.606061,0.696970,0.878788
+Immunoglobulin Standard,0.181818
+1% Albumin Standard,0.454545
+0-50% (NH$_4$)$_2$SO$_4$ Dialysate,0.151515,0.212121,0.666667,0.939394
+50-100% (NH$_4$)$_2$SO$_4$ Dialysate,0.484848,0.666667,0.939394
+1% Hemoglobin Standard,0.666667,0.939394
+10% Sheep Plasma,0.151515,0.212121,0.484848

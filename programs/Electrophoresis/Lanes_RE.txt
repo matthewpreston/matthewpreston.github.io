@@ -1,0 +1,9 @@
+Lane Components,Rf Value1,Rf Value2,... (Each lane occupies one line)
+Undigested,0.476923
+EcoRI,0.476923
+ScaI,0.476923
+AvaI,0.476923
+EcoRI + ScaI,0.476923,0.492308
+EcoRI + AvaI,0.553846,0.723077
+ScaI + AvaI,0.476923,0.6,0.646154
+EcoRI + ScaI + AvaI,0.538462,0.584615,0.723077
