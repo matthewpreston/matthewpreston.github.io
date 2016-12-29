@@ -1,4 +1,7 @@
 body {
+  background-color: #f8f8f8;
+}
+.wrapper {
   background-color: #585858;
 }
 article .title {
@@ -25,7 +28,7 @@ article .divider {
 .sidebar .divider {
   background-color: #000000;
 }
-.sidebar li a:hover {
+.sidebar li a:hover, .sidebar a:hover .sidebar_title{
   background-color: #ffffcc;
 }
 .sidebar li.active a{

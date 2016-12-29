@@ -5,7 +5,7 @@ body {
   background-color: #585858;
 }
 article .title {
-  background-color: #3d3c3a;
+  background-color: #ef6b00;
   color: #ffffff;
 }
 article .small-divider {
@@ -16,34 +16,34 @@ article .divider {
 }
 .outer-border {
   background-color: #585858;
-  border-color: #3d3c3a;
+  border-color: #ef6b00;
 }
 .inner-border {
-  background-color: #e5e4e2;
-  border-color: #3d3c3a;
+  background-color: #f4cea8;
+  border-color: #ef6b00;
 }
 #download .button {
-  border-color: #3d3c3a;
+  border-color: #ef6b00;
 }
 .sidebar .divider {
   background-color: #000000;
 }
 .sidebar li a:hover, .sidebar a:hover .sidebar_title{
-  background-color: #e5e4e2;
+  background-color: #f4cea8;
 }
 .sidebar li.active a{
   color: #ffffff;
-  background-color: #3d3c3a;
+  background-color: #ef6b00;
 }
 aside .button {
-  border-color: #3d3c3a;
+  border-color: #ef6b00;
 }
 aside .button:hover {
-  background-color: #e5e4e2;
+  background-color: #f4cea8;
 }
 aside .round-button {
-  border-color: #3d3c3a;
+  border-color: #ef6b00;
 }
 aside .round-button:hover {
-  background-color: #e5e4e2;
+  background-color: #f4cea8;
 }

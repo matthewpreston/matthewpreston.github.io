@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var $window = $(window)
+  var $window = $(window)
 
   //Fix divider background-color
   $(".divider").each(function() {

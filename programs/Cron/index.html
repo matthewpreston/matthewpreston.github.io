@@ -33,7 +33,7 @@
       </div>
       <div class="collapse navbar-collapse" id="menuNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs">Programs</a></li>
+          <li><a href="../index.html">Programs</a></li>
           <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
           <li><a href="../../about.html">About</a></li>
         </ul>
@@ -214,7 +214,7 @@
                 <li>*/15 * * * * bash /path/to/program/LoadCheck.sh</li>
               </ol>
             </div>
-            <p>&emsp;&emsp;&emsp;If you're using nano, press CTRL+O then hit ENTER to write and CTRL+X to exit. And if you're using vim, you did this to yourself. Now we're done! Cron was made with the user in mind. As you can see what we wrote should execute every 15 minutes; of course you're free to change this to fit your personal whims. If you're curious to what other scripts I have my server unconsciously run, I wrote <a href="#">ZombiePrograms.sh</a> for checking 'zombie' jobs. They're not explicitly zombies (i.e. they don't show up as zombie when you run <strong>top</strong>), but seem to be stuck in a huge loop. And for bioinformatics people, there's <a href="#">UpdateBlastDB.sh</a> which you can use to run every day or every week.</p>
+            <p>&emsp;&emsp;&emsp;If you're using nano, press CTRL+O then hit ENTER to write and CTRL+X to exit. And if you're using vim, you did this to yourself. Now we're done! Cron was made with the user in mind. As you can see what we wrote should execute every 15 minutes; of course you're free to change this to fit your personal whims. If you're curious to what other scripts I have my server unconsciously run, I wrote <a href="zombiejobs.sh">ZombiePrograms.sh</a> for checking 'zombie' jobs. They're not explicitly zombies (i.e. they don't show up as zombie when you run <strong>top</strong>), but seem to be stuck in a huge loop. And for bioinformatics people, there's <a href="UpdateBlastDB.tar.gz">UpdateBlastDB.sh</a> which you can use to run every day or every week.</p>
           </div>
         </div>
       </div>
@@ -222,7 +222,11 @@
     <!--Sidebar-->
     <aside class="col-sm-3">
       <div class="sidebar" id="spy-target">
-        <h3>Cron Tutorial</h3>
+        <a href="#">
+          <div class="sidebar_title">
+            <h3>Cron Tutorial</h3>
+          </div>
+        </a>
         <div class="divider"></div>
         <ul class="nav nav-list">
           <li><a href="#introduction">Introduction</a></li>
@@ -232,7 +236,7 @@
         </ul>
       </div>
       <div class="button" id="all-programs">
-        <a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs">All Programs</a>
+        <a href="../index.html">All Programs</a>
       </div>
       <div class="round-button" id="top">
         <a href="#">Top</a>
@@ -242,8 +246,8 @@
 
   <!--Footer-->
   <footer class="container-fluid">
-    <p>Updated on August 2016</p>
-    <p>Thanks to <a href="http://kellyli.me/">Kelly Li</a> | <a href="http://wummel.github.io/">Wummel</a> | <a href="http://www.danielecook.com/">Daniel E. Cook</a> | <a href="http://www.w3schools.com/">w3schools</a></p>
+    <p>Updated on December 2016</p>
+    <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
   </footer>
 
   <!--JQuery-->
