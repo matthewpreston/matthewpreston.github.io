@@ -14,6 +14,11 @@
     <lastmod>2016-08-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
+  <url>
+  	<loc>https://matthewpreston.github.io/programs/index.html</loc>
+  	<lastmod>2016-12-29</lastmod>
+  	<changefreq>monthly</changefreq>
+  </url>
   <!-- Programs -->
   <url>
     <loc>https://matthewpreston.github.io/programs/Mega/index.html</loc>
@@ -32,12 +37,17 @@
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Cron/index.html</loc>
-    <lastmod>2016-08-31</lastmod>
+    <lastmod>2016-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Electrophoresis/index.html</loc>
     <lastmod>2016-12-22</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://matthewpreston.github.io/programs/Make/index.html</loc>
+    <lastmod>2016-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
 </urlset>

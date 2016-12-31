@@ -133,23 +133,26 @@ article .title h4 {
   margin-bottom: 0px;
   text-align: center;
 }
+.code .comment {
+  color: #008000;
+}
 .code .keyword {
   color: #0000ff;
-}
-.code .operator {
-  color: #7e3517;
-}
-.code .var {
-  color: #e56717;
-}
-.code .string {
-  color: #736f6e;
 }
 .code .num {
   color: #ff0000;
 }
-.code .comment {
-  color: #008000;
+.code .operator {
+  color: #7e3517;
+}
+.code .string {
+  color: #736f6e;
+}
+.code .type {
+  color: #571b7e;
+}
+.code .var {
+  color: #e56717;
 }
 .sidebar {
   background-color: #f8f8f8;

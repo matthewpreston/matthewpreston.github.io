@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>Makefile Tutorial, For Repeated Compilation</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-bash.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../index.html">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>Makefile Tutorial</h1>
+        <div class="small-divider"></div>
+        <h4>For Repeated Compilation</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/Makefile.png"><img src="../../img/Makefile.png" alt="Makefile Example"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Tired of having to type out a long-winded <strong>gcc</strong> command? Keep forgetting a pesky flag or two? Or maybe an entire source file nestled in your burstly project? Well there's a better way. You've probably used it before especially if you've downloaded some <a href="https://github.com/">GitHub</a> projects. <strong>Make</strong>. But how to use such untapped power? Many tutorials are pretty skimpy on details, or too overburdening to get the tangible facts. Perhaps this one is just right.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Type once, compile ad infinitum (<strong>&#x2135;<sub>0</sub></strong> times to be exact).</li>
+              <li>Compatible with any *nix system (or those with <strong>make</strong> installed).</li>
+              <li>Usability with <strong>gcc</strong>, <strong>g++</strong>, <strong>gfortran</strong>, etc.</li>
+              <li>Ability to be customized by your users.</li>
+            </ul>
+          </div>
+          <!--Download/Github/Dependencies-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td><a href="MakefileExampleV1.0.tar.gz" title="Download MakefileExampleV1.0.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> MakefileExampleV1.0.tar.gz</a></td>
+                <td><a href="MakefileExampleV1.1.tar.gz" title="Download MakefileExampleV1.1.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> MakefileExampleV1.1.tar.gz</a></td>
+                <td><a href="MakefileExampleV1.2.tar.gz" title="Download MakefileExampleV1.2.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> MakefileExampleV1.2.tar.gz</a></td>
+                <td><a href="MakefileExampleV1.3.tar.gz" title="Download MakefileExampleV1.3.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> MakefileExampleV1.3.tar.gz</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Let's start with a 'dead' simple program which we wish to compile:</p>
+            <div class="code" title="main.cpp">
+              <ol>
+                <li><span class="operator">#include &lt;iostream&gt;</span></li>
+                <li></li>
+                <li><span class="type">int</span> main<span class="keyword">(</span><span class="type">int</span> argc<span class="keyword">,</span> <span class="type">char</span> <span class="keyword">*</span>argv<span class="keyword">[]) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cout <span class="keyword">&lt;&lt;</span> <span class="string">"Goodbye, cruel world!"</span> <span class="keyword">&lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> <span class="num">0</span><span class="keyword">;</span></li>
+                <li><span class="keyword">}</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Typically we'd run: <strong>g++ -o Example.exe main.cpp</strong> to get our desired executable. But let's plan for the future as this is will be an expanding example. To run our <strong>make</strong> command, we need a target "Makefile". So let's make one (pun possibly intended):</p>
+            <div class="code" title="Makefile">
+              <ol>
+                <li><span class="comment"># Makefile for our example program (this is a comment)</span></li>
+                <li><span class="comment"># V1.0
+                <li></li>
+                <li><span class="var">Example.exe</span>:</li>
+                <li>&emsp;&emsp;&emsp;&emsp;g++ -o Example.exe main.cpp</li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Now type <strong>make</strong> and presto. Makefiles are essentially recipes to create a certain object which can be object files (.o), library files (.dll), or the final executable(s) (.exe). In our case, we had one recipe, to make "Example.exe" and to create it, we run <strong>g++ -o Example.exe main.cpp</strong>. Try running <strong>make</strong> again. It should say that everything is up to date. Change the source file subtly and calling our one word command again results in a new compiliation. This will be important later. Let's add to this example to further our understanding. Since we're (I'm) writing this in C++, let's add a header file with an accompanying source file. Firstly, here's the new source and header files, "Parrot.hpp" (I wonder what it could do?!?), "Parrot.cpp" and the new "main.cpp":</p>
+            <div class="code" title="Parrot.hpp">
+              <ol>
+                <li><span class="operator">#ifndef PARROT_H</span></li>
+                <li><span class="operator">#define PARROT_H</span></li>
+                <li></li>
+                <li><span class="operator">#include &lt;ostream&gt;</span></li>
+                <li><span class="operator">#include &lt;string&gt;</span></li>
+                <li></li>
+                <li><span class="comment">// Give it a phrase and you'll never hear the end of it.</span></li>
+                <li><span class="type">class</span> Parrot <span class="keyword">{</span></li>
+                <li><span class="type">public</span><span class="keyword">:</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;Parrot<span class="keyword">(</span>std<span class="keyword">::</span>string Phrase<span class="keyword">) :</span> phrase<span class="keyword">(</span>Phrase<span class="keyword">)</span> <span class="keyword">{}</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="comment">// Echoes the provided phrase to a given output stream</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="type">void</span> Speak<span class="keyword">(</span>std<span class="keyword">::</span>ostream <span class="keyword">&amp;</span>os<span class="keyword">);</span></li>
+                <li><span class="type">private</span><span class="keyword">:</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>string phrase<span class="keyword">;</span></li>
+                <li><span class="keyword">};</span></li>
+                <li></li>
+                <li><span class="operator">#endif</span></li>
+              </ol>
+            </div>
+            <div class="code" title="Parrot.cpp">
+              <ol>
+                <li><span class="operator">#include &lt;ostream&gt;</span></li>
+                <li><span class="operator">#include &lt;string&gt;</span></li>
+                <li><span class="operator">#include "Parrot.hpp"</span></li>
+                <li></li>
+                <li><span class="comment">// Echoes the provided phrase to a given output stream</span></li>
+                <li><span class="type">void</span> Parrot<span class="keyword">::</span>Speak<span class="keyword">(</span>std<span class="keyword">::</span>ostream <span class="keyword">&amp;</span>os<span class="keyword">) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;os <span class="keyword">&lt;&lt;</span> phrase <span class="keyword">&lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li><span class="keyword">}</span></li>
+              </ol>
+            </div>
+            <div class="code" title="main.cpp">
+              <ol>
+                <li><span class="operator">#include &lt;iostream&gt;</span></li>
+                <li><span class="operator">#include "Parrot.hpp"</span></li>
+                <li></li>
+                <li><span class="type">int</span> main<span class="keyword">(</span><span class="type">int</span> argc<span class="keyword">,</span> <span class="type">char</span> <span class="keyword">*</span>argv<span class="keyword">[]) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;Parrot avianBeing <span class="keyword">=</span> Parrot<span class="keyword">(</span><span class="string">"Polly isn't fond of crackers"</span><span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;avianBeing<span class="keyword">.</span>Speak<span class="keyword">(</span>std<span class="keyword">::</span>cout<span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> <span class="num">0</span><span class="keyword">;</span></li>
+                <li><span class="keyword">}</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Now back to our "Makefile":</p>
+            <div class="code" title="Makefile">
+              <ol>
+                <li><span class="comment"># Makefile for our example program</span></li>
+                <li><span class="comment"># V1.1
+                <li></li>
+                <li><span class="var">Example.exe</span>: main.o Parrot.o</li>
+                <li>&emsp;&emsp;&emsp;&emsp;g++ -o Example.exe main.o Parrot.o</li>
+                <li></li>
+                <li><span class="var">main.o</span>: Parrot.hpp</li>
+                <li>&emsp;&emsp;&emsp;&emsp;g++ -c main.cpp</li>
+                <li></li>
+                <li><span class="var">Parrot.o</span>: Parrot.hpp</li>
+                <li>&emsp;&emsp;&emsp;&emsp;g++ -c parrot.cpp</li>
+                <li></li>
+                <li><span class="var">.PHONY</span>: clean</li>
+                <li></li>
+                <li><span class="var">clean</span>:</li>
+                <li>&emsp;&emsp;&emsp;&emsp;rm -f Example.exe main.o Parrot.o</li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Jesus H. Christ slow down! Let's go through it bit by bit. Our original "Example.exe" recipe now has two dependencies: "main.o" and "Parrot.o", and the g++ command has adapted to these object files. But how do we make these dependencies? Just add another recipe! So there's one for "main.o" and "Parrot.o" from their respective source files. Let's ignore the ".PHONY" for the time being and move onto "clean". This recipe will remove the previous files that were created, allowing for a fresh start. When in doubt, call <strong>make clean</strong> to begin anew. This begs a question, if we can write <strong>make clean</strong>, then could we write <strong>make Example.exe</strong>? Indeed. You can choose which recipes you wish to follow if you desire. But as seen previously, if you make an edit in one of the files, <strong>make</strong> will compile those files that have changed, while leaving those that are up to date untouched. Very good. But this is actually quite verbose for a "Makefile" and can be shortened quite a bit. Take 3!</p>
+            <div class="code" title="Makefile">
+              <ol>
+                <li><span class="comment"># Makefile for our example program</span></li>
+                <li><span class="comment"># V1.2
+                <li></li>
+                <li><span class="keyword">CXX</span> = g++</li>
+                <li><span class="keyword">OBJECTS</span> = main.o Parrot.o</li>
+                <li></li>
+                <li><span class="var">Example.exe</span>: <span class="keyword">$(OBJECTS)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(CXX)</span> -o <span class="keyword">$@ $(OBJECTS)</span></li>
+                <li></li>
+                <li><span class="var">main.o</span>: Parrot.hpp</li>
+                <li><span class="var">Parrot.o</span>: Parrot.hpp</li>
+                <li></li>
+                <li><span class="var">.PHONY</span>: clean</li>
+                <li><span class="var">clean</span>:</li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(RM)</span> Example.exe <span class="keyword">$(OBJECTS)</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;We now introduce variables into the mix. We list the dependencies of "Example.exe" as a variable, which is previously initialized to all our desired object files. Additionally we added "$(CXX)" to allow our user to change up the compiler if they really want to (most likely not). Instead of explicitly writing in "Example.exe" after the -o flag, we can write "$@" which refers to the name of the recipe, namely "Example.exe". Savings. Finally in our "clean" recipe, we have a "$(RM)", which would expand to "rm -f". But what's with the lack of instructions with our object files? Don't we need those? Actually <strong>make</strong> is smart. It assumes (correctly) that you're going to call <strong>$(CXX) -c main.cpp</strong> and so forth. So why bother to write it? This reduces clutter, allowing one to see easily just the dependencies for each object file. For simple programs, this format should suffice. But for a more complicated architecture, you'd want to pass some more flags into our compiler. So let's explore that. This next bit uses <a href="http://www.boost.org/">Boost</a>, which expands C++'s paultry library. Ah its one major downside. Anyways, I'll be using the <a href="http://www.boost.org/doc/libs/1_63_0/doc/html/program_options.html">Program Options</a> and <a href="http://www.boost.org/doc/libs/1_63_0/libs/filesystem/doc/index.htm">Filesystem</a> libraries as to add some nice command line support. Here's the revised "main.cpp" for reference (don't bother to understand, just note the include's):</p>
+            <div class="code" title="main.cpp">
+              <ol>
+                <li><span class="operator">#include &lt;iostream&gt;</span></li>
+                <li><span class="operator">#include &lt;string&gt;</span></li>
+                <li><span class="operator">#include &lt;vector&gt;</span></li>
+                <li><span class="operator">#include &lt;boost/filesystem.hpp&gt;</span></li>
+                <li><span class="operator">#include &lt;boost/program_options.hpp&gt;</span></li>
+                <li><span class="operator">#include "Parrot.hpp"</span></li>
+                <li></li>
+                <li><span class="keyword">namespace {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="type">const int</span> SUCCESS <span class="keyword">=</span> <span class="num">0</span><span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="type">const int</span> ERROR_IN_COMMAND_LINE <span class="keyword">=</span> <span class="num">1</span><span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="type">const int</span> ERROR_UNHANDLED_EXCEPTION <span class="keyword">=</span> <span class="num">2</span><span class="keyword">;</span></li>
+                <li><span class="keyword">}</span></li>
+                <li></li>
+                <li><span class="keyword">namespace</span> po <span class="keyword">=</span> boost<span class="keyword">::</span>program_options<span class="keyword">;</span></li>
+                <li></li>
+                <li><span class="type">int</span> main<span class="keyword">(</span><span class="type">int</span> argc<span class="keyword">,</span> <span class="type">char</span> <span class="keyword">*</span>argv<span class="keyword">[]) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">try {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="type">int</span> osType<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>vector<span class="keyword">&lt;</span>std<span class="keyword">::</span>string<span class="keyword">&gt;</span> phrases<span class="keyword">;</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Add additional arguments</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;po<span class="keyword">::</span>options_description desc<span class="keyword">(</span><span class="string">"Options"</span><span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;desc<span class="keyword">.</span>add_options<span class="keyword">()</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">(</span><span class="string">"help,h"</span><span class="keyword">,</span> <span class="string">"Display help"</span><span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">(</span><span class="string">"output_stream,o"</span><span class="keyword">,</span> po<span class="keyword">::</span>value<span class="keyword">&lt;</span><span class="type">int</span><span class="keyword">&gt;(&amp;</span>osType<span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">-&gt;</span>value_name<span class="keyword">(</span><span class="string">"INT"</span><span class="keyword">)-&gt;</span>default_value<span class="keyword">(</span><span class="num">1</span><span class="keyword">),</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="string">"1 for STDOUT, 2 for STDERR"</span><span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">(</span><span class="string">"phrase"</span><span class="keyword">,</span> po<span class="keyword">::</span>value<span class="keyword">&lt;</span> std<span class="keyword">::</span>vector<span class="keyword">&lt;</span>std<span class="keyword">::</span>string<span class="keyword">&gt; &gt;(&amp;</span>phrases<span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">-&gt;</span>multitoken<span class="keyword">()-&gt;</span>composing<span class="keyword">()-&gt;</span>required<span class="keyword">(),</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="string">"Phrase to be parroted back"</span><span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">;</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Add positional arguments</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;po<span class="keyword">::</span>positional_options_description positional<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;positional<span class="keyword">.</span>add<span class="keyword">(</span><span class="string">"phrase"</span><span class="keyword">, -</span><span class="num">1</span><span class="keyword">);</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Set up variable map</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;po<span class="keyword">::</span>variables_map vm<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">try {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;po<span class="keyword">::</span>store<span class="keyword">(</span>po<span class="keyword">::</span>command_line_parser<span class="keyword">(</span>argc<span class="keyword">,</span> argv<span class="keyword">).</span>options<span class="keyword">(</span>desc<span class="keyword">)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">.</span>positional<span class="keyword">(</span>positional<span class="keyword">).</span>run<span class="keyword">(),</span> vm<span class="keyword">);</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Check help first in order to exit</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">if (</span>vm<span class="keyword">.</span>count<span class="keyword">(</span><span class="string">"help"</span><span class="keyword">)) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>string exe <span class="keyword">=</span> boost<span class="keyword">::</span>filesystem<span class="keyword">::</span>basename<span class="keyword">(</span>argv<span class="keyword">[</span><span class="num">0</span><span class="keyword">]);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cout <span class="keyword">&lt;&lt;</span> <span class="string">"USAGE: "</span> <span class="keyword">&lt;&lt;</span> exe <span class="keyword">&lt;&lt;</span> <span class="string">" [options] &lt;phrase&gt;...\n\n"</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">&lt;&lt;</span> desc <span class="keyword">&lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> SUCCESS<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Parse arguments and check constraints</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;po<span class="keyword">::</span>notify<span class="keyword">(</span>vm<span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">} catch (</span>po<span class="keyword">::</span>required_option <span class="keyword">&amp;</span>e<span class="keyword">) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cerr <span class="keyword">&lt;&lt;</span> <span class="string">"Missing required option.\nTraceback:\n"</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">&lt;&lt;</span> e<span class="keyword">.</span>what<span class="keyword">() &lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> ERROR_IN_COMMAND_LINE<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">} catch (</span>po<span class="keyword">::</span>error <span class="keyword">&amp;</span>e<span class="keyword">) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cerr <span class="keyword">&lt;&lt;</span> <span class="string">"An unexpected argument parsing error occurred.\n"</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">&lt;&lt;</span> <span class="string">"Traceback\n"</span> <span class="keyword">&lt;&lt;</span> e<span class="keyword">.</span>what<span class="keyword">() &lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> ERROR_IN_COMMAND_LINE<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Check our arguments</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">if (</span>vm<span class="keyword">.</span>count<span class="keyword">(</span><span class="string">"output_stream"</span><span class="keyword">)) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">if (</span>osType <span class="keyword">&lt;</span> <span class="num">1</span> <span class="keyword">||</span> osType <span class="keyword">&gt;</span> <span class="num">2</span> <span class="keyword">) {</span> <span class="comment">// Not STDOUT or STDERR</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cerr <span class="keyword">&lt;&lt;</span> <span class="string">"Output stream is neither STDOUT or STDERR, "</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">&lt;&lt;</span> <span class="string">"exiting"</span> <span class="keyword">&lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> ERROR_IN_COMMAND_LINE<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Compile our phrase</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>string phrase <span class="keyword">=</span> <span class="string">""</span><span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">for (</span>std<span class="keyword">::</span>vector<span class="keyword">&lt;</span>std<span class="keyword">::</span>string<span class="keyword">&gt;::</span>iterator it <span class="keyword">=</span> phrases<span class="keyword">.</span>begin<span class="keyword">();</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;it <span class="keyword">!=</span> phrases<span class="keyword">.</span>end<span class="keyword">();</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;it<span class="keyword">++)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">{</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">if (</span>phrase <span class="keyword">==</span> <span class="string">""</span><span class="keyword">) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;phrase <span class="keyword">= *</span>it<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">} else {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;phrase <span class="keyword">+=</span> <span class="string">" "</span> <span class="keyword">+ *</span>it<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">// Let our pet speak</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Parrot avianBeing <span class="keyword">=</span> Parrot<span class="keyword">(</span>phrase<span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;avianBeing<span class="keyword">.</span>Speak<span class="keyword">((</span>osType <span class="keyword">==</span> <span class="num">1</span><span class="keyword">) ?</span> std<span class="keyword">::</span>cout <span class="keyword">:</span> std<span class="keyword">::</span>cerr<span class="keyword">);</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> SUCCESS<span class="keyword">;</span></li>
+                <li></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">} catch (</span>std<span class="keyword">::</span>exception <span class="keyword">&amp;</span>e<span class="keyword">) {</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;std<span class="keyword">::</span>cerr <span class="keyword">&lt;&lt;</span> <span class="string">"An unexpected error in main occurred.\nTraceback:\n"</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">&lt;&lt;</span> e<span class="keyword">.</span>what<span class="keyword">() &lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> ERROR_UNHANDLED_EXCEPTION<span class="keyword">;</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
+                <li><span class="keyword">}</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Kinda overkill just to add one option (whether to parrot to STDOUT or STDERR) and one positional argument (what phrase we want to parrot). To be honest, don't worry about understanding any of it; it's just meddling with syntax. But one question remains. How do we compile it? Boost requires the use of a dynamically linked library (.dll) on Windows systems or a shared object (.so) on MacOS(?) or Linux platforms. So this will require the -l flag. IMPORTANT NOTE: Remember when using the -l flag to remove the starting "lib" part and the extension (i.e. libboost_program_options.so -> boost_program_options). But where can we find this file? You may have to a bit of searching (like I did). I personally found mine at "/usr/lib/x86_64-linux-gnu" on a Ubuntu 64 bit machine but yours may be different (and your users).</p>
+            <div class="code" title="Makefile">
+              <ol>
+                <li><span class="comment"># Makefile for our example program</span></li>
+                <li><span class="comment"># V1.3
+                <li></li>
+                <li><span class="keyword">DEBUG</span> = -g</li>
+                <li><span class="keyword">CXX</span> = g++</li>
+                <li><span class="keyword">CXXFLAGS</span> = -Wall $(DEBUG)</li>
+                <li><span class="keyword">LDFLAGS</span> = -L/usr/lib/x86_64-linux-gnu \</li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-lboost_filesystem \</li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-lboost_program_options \</li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-lboost_system</li>
+                <li><span class="keyword">OBJECTS</span> = main.o Parrot.o</li>
+                <li></li>
+                <li><span class="var">all</span>: <span class="keyword">Example.exe</span></li>
+                <li></li>
+                <li><span class="var">Example.exe</span>: <span class="keyword">$(OBJECTS)</span></li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(CXX)</span> -o <span class="keyword">$@ $(OBJECTS) $(LDFLAGS)</span></li>
+                <li><span class="var">main.o</span>: Parrot.hpp</li>
+                <li><span class="var">Parrot.o</span>: Parrot.hpp</li>
+                <li></li>
+                <li><span class="var">.PHONY</span>: all clean</li>
+                <li><span class="var">clean</span>:</li>
+                <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(RM)</span> Example.exe <span class="keyword">$(OBJECTS)</span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;We add some additional flags to be passed by "$(CXX)", namely those in "$(CXXFLAGS)" and "$(LDFLAGS)". We allow for debugging (using -g which can be switched off by leaving "DEBUG" blank), to witness all warnings (using -Wall), to show where the location of where our .so files are (using -L), and the library files themselves (using -l, sneaky boost/filesystem.hpp requires both libboost_filesystem.so and libboost_system.so). IMPORTANT NOTE: the "$(LDFLAGS)" must as the last argument for "$(CXX)" or else you'll get an error... took me too long to find this one out! So where's "$(CXXFLAGS)" in this compilation command? Well <strong>make</strong> has a slew of default variables that it uses implicitly (see <a href="https://www.gnu.org/software/make/manual/make.html#Implicit-Variables">Implicit Variable Rules</a> for too much info). If you do run this Makefile, you'll see the -Wall and -g flags are indeed used. The new "all" recipe is meant to be for projects with multiple executables, but we only have one sadly. When you run <strong>make</strong>, it is actually <strong>make all</strong> so you don't need to type the extra noun. Finally let's address ".PHONY". If you're extremely observant (maybe even more than Holmes), all our recipes had names that became a file. For example, the recipe "main.o" was created through the compilation of "main.cpp" into an object file. This is not a coincidence, but an integral part of <strong>make</strong>. The "clean" recipe does not create a file called "clean". So what happens if we had a file called "clean"? <strong>make</strong> would check the dependencies of the "clean" recipe, to which there are none, and conclude that the "clean" file is up to date. The instructions below would never execute and desired programs/object files would not be deleted. Oh dear. However, when we declare "clean" as a dependency to ".PHONY", this overrides the up-to-date-checking and allows its recipe to be conducted. To wrap up, here's a final overview of the commands and showcase of the program we've built:</p>
+            <div class="terminal">
+              <ol>
+                <li><span class="prompt"></span>make</li>
+                <li>g++ -Wall -g&emsp;&emsp;&emsp;-c -o main.o main.cpp</li>
+                <li>g++ -Wall -g&emsp;&emsp;&emsp;-c -o Parrot.o Parrot.cpp</li>
+                <li>g++ -o Example.exe main.o Parrot.o -L/usr/lib/x86_64-linux-gnu -lboost_filesystem -lboost_program_options -lboost_system</li>
+                <li><span class="prompt"></span>./Example.exe -h</li>
+                <li>USAGE: Example [options] &lt;phrase&gt;...</li>
+                <li></li>
+                <li>Options:</li>
+                <li>&emsp;&emsp;-h [ --help ]&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Display help</li>
+                <li>&emsp;&emsp;-o [ --output_stream ] INT (=1) 1 for STDOUT, 2 for STDERR</li>
+                <li>&emsp;&emsp;--phrase arg&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Phrase to be parroted back</li>
+                <li></li>
+                <li><span class="prompt"></span>./Example.exe -o 2 Open the pod bay doors, HAL</li>
+                <li>Open the pod bay doors, HAL</li>
+                <li><span class="prompt"></span>make clean</li>
+                <li>rm -f Example.exe main.o Parrot.o</li>
+                <li><span class="prompt"></span></li>
+              </ol>
+            </div>
+            <p>&emsp;&emsp;&emsp;Hopefully this tutorial gave you enough insight into Makefiles in order to write one of your own. There is _much_ more to this utility, such as wildcard characters, conditional expressions, functions, etc. but I won't go into them (because I don't quite need that complexity for my needs just yet). If you're curious, take a gander: <a href="https://www.gnu.org/software/make/manual/make.html">Make Manual</a>.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <a href="#">
+          <div class="sidebar_title">
+            <h3>Makefile Tutorial</h3>
+          </div>
+        </a>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="../index.html">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on December 2016</p>
+    <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>
