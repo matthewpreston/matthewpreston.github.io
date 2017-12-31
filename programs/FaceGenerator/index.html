@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>FaceGenerator.java Creating Faces from Papers Please</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-java.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../index.html">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>FaceGenerator.java</h1>
+        <div class="small-divider"></div>
+        <h4>Creating Faces from <em>Papers Please</em></h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="TODO"><img src="TODO" alt="Face Generation"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;A silly program aimed at trying to reverse engineer <a href="http://papersplea.se/">Papers Please</a> - in this case: the face generation engine.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Generates faces.</li>
+              <li>That's it so far.</li>
+            </ul>
+          </div>
+          <!--Download/Github/Dependencies-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td><a href="https://github.com/matthewpreston/PapersPleaseFaceGenerator" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Before I demonstrate it, let's get some background info. &quot;Why?&quot; as Herman Melville once quoted. Well, I can't fully disclose that information just yet, except that this is one facet of my secret project (which may or may not be on a short/permanent hiatus). I'll try my best to finish it though.</p>
+            <p>&emsp;&emsp;&emsp;To test it out, just compile and execute the program via:</p>
+            <div class="code terminal">
+              <ol id="facegenerator">
+                <li><span class="prompt"></span>javac *.java</li>
+                <li><span class="prompt"></span>java FaceDisplayer</li>
+              </ol>
+              <div class="code-btn" data-target="#facegenerator">More</div>
+            </div>
+            <p>&emsp;&emsp;&emsp;A new face should appear, as well as some of the inner workings of how faces are built. The key is that there are sets of male and female people, each on their own representing one person. Then, there exists a separate RGB mask for each person detailing the shoulders, eyes, nose, and some other special designated colours for overlaps/voiding. These masks are applied to the original photo, acting as separate pieces of a face. These are scaled a bit and finally overlapped to form a new visage. As in the game, this same procedure is done to produce three different &quot;photos&quot;: the actual entrant, a black and white photo, and one used in strip searches.</p>
+            <table>
+              <tr>
+                <th><a href="TODO"><img src="TODO" alt="Face Deconstruction and Reconstruction"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">Face Deconstruction and Reconstruction</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;Reverse engineering can be a difficult feat. You attempt to look into a black box. One can provide a meandry of inputs which correspond to a particular output. But, deducing the function at hand is, I'm pretty sure, a NP problem. This procedure intertwines science and art together; logic and deduction will get you partway until there are too many variables to juggle whilst in art, one studies the concept of form, i.e. how objects ought to look. We can easily discern whether a face looks &quot;right&quot; with a fraction of a glance. Thus art will be the basis for one's reasoning on how to navigate such a problem... until you bust out the statistics. I took two weeks being perpetually stumped by how facial features were scaled to make a complexion appear natural. I got so fed up that I performed a statistical analysis to find a correlation between how these Frankenstein bits were being stretched in relation to one another. Here's some graphs I generated:</p>
+            <table>
+              <tr>
+                <th><a href="TODO"><img src="TODO" alt="Set of graphs detailing facial feature scaling"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">Praise Pearson and his Correlation Value</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;<a href="TODO">Lucas Dukope</a>, the creator of <a href="TODO">Papers Please</a>, certainly thought this conundrum through as I am unable to faithfully follow the original face generation algorithm. However, upon swiping left through a multitude of visages, my attempts yield reasonable results.</p>
+            <table>
+              <tr>
+                <th><a href="TODO"><img src="TODO" alt="My Jorji"></a></th>
+                <th><a href="TODO"><img src="TODO" alt="Dukope's Jorji"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">One only tells lies</td>
+                <td class="table-title">The other smuggles drugs</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <a href="#">
+          <div class="sidebar_title">
+            <h3>FaceGenerator.java</h3>
+          </div>
+        </a>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="../index.html">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on December 2017</p>
+    <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>

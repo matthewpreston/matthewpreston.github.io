@@ -19,7 +19,6 @@ $(document).ready(function() {
     var height = $progCont.height();
     $progCont.css("background-position", "50% " + Math.round((height - pos) * velocity) + "px"); 
   }
-  parallax();//Set up initial conditions
   $window.bind("scroll", parallax);
 
   //Change the properties of elements when resizing
@@ -65,6 +64,9 @@ $(document).ready(function() {
       }
     });
   }
-  resizer();//Set up initial conditions
   $window.bind("resize", resizer);
+
+  //Set up initial conditions
+  parallax();
+  resizer();
 });

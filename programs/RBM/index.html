@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>RBM.py - Reciprocal Best Matching Algorithm</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-python.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../index.html">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>RBM.py</h1>
+        <div class="small-divider"></div>
+        <h4>Reciprocal Best Matching Algorithm</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/RBM.png"><img src="../../img/RBM.png" alt="Reciprocal Best Matching Algorithm Flowchart"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Attempts to annotate unknown DNA sequences using a traditional bioinformatics approach - reciprocal best matching - but with further basing in statistics and integer programming.</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Based on statistics, information theory, graph theory, and integer programming so you know at least some effort went into it</li>
+            </ul>
+          </div>
+          <!--Download/Github/Dependencies-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td><a href="RBM.zip" title="Download RBM.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> RBM.zip</a></td>
+                <td><a href="RBM.tar.gz" title="Download RBM.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> RBM.tar.gz</a></td>
+                <td><a href="https://github.com/matthewpreston/ReciprocalBestMatch" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="container-fluid" id="dependencies">
+            <h3>Dependencies</h3>
+            <div class="divider"></div>
+            <ul>
+              <li><a href="http://biopython.org/">BioPython</a> - For bioinformatical work</li>
+              <li><a href="https://www.ibm.com/analytics/data-science/prescriptive-analytics/optimization-modeling">OPL</a> - For finding the optimal solution via integer programming</li>
+            </ul>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;I previously designed a Python script that <a href="../AnnotateContigs/index.html">annotates contigs</a> for my bioinformatical research, but I felt that I took the easy way and ignored indels completely. Looking at other papers, I see that others attempt to endow sequences in strange fashions as well, such as arbitrary yet blind significance cutoffs, titling based off of the number of reads tiling, and assigning names with sequences that reciprocally &quot;hit&quot; each other using <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>. Pragmatic from a scripting sense, but not fully justifiable from a theoretical perspective. Thus, I attempted to endeavour to persevere in creating a mathematically based algorithm for annotating contigs.</p>
+            <p>&emsp;&emsp;&emsp;I will now detail how the reciprocal best matching algorithm is conducted. Beforehand, there exists two sets of sequences: the queries or unknown sequences and the references, which identities are known. The preliminary step is to BLAST the set of queries to the references, then in a reciprocal manner, the references to the queries. As a reminder, BLAST attempt to match each query to a reference and if significant (i.e. above a certain user defined threshold) will assign a &quot;hit&quot; between these two. There may be one or several high-scoring segment pairs (HSPs) between these two sequences, each one portraying their sequence similarity and as well, assigning a tangible score for each HSP. With the setup done, the first step is to condense these HSP scores into a single similarity score, which is accomplished using the properties of the <a href="https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html#head2">Poisson distribution</a>. Secondly, these reciprocal scores (which happen to be p-values) are merged into a single value utilizing some techniques found in information theory. Finally, a maximal matching is performed via integer programming.</p>
+            <div class="code terminal">
+              <ol id="rbm">
+                <li><span class="prompt"></span>ls</li>
+                <li>Queries.fasta&nbsp;&nbsp;QueryToRef.xml&nbsp;&nbsp;References.fasta&nbsp;&nbsp;RefToQuery.xml</li>
+                <li><span class="prompt"></span>python GetRBMData.py QueryToRef.xml RefToQuery.xml Matches.csv</li>
+                <li><span class="prompt"></span>python ReverseComplementQueries.py Queries.fasta QueryToRef.xml Matches.csv</li>
+                <li><span class="prompt"></span>python CheckRBMAlgo.py \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;-t 3 \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;-o identities.csv \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;Queries_ReverseComplement.fasta \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;References.fasta \</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;Matches.csv</li>
+              </ol>
+              <div class="code-btn" data-target="#rbm">More</div>
+            </div>
+            <p>&emsp;&emsp;&emsp;To run, use the commands seen above, ensuring that you have both sets of sequences as FASTA and XML files generated from BLASTing. The final output file, in this case would be identities.csv, holds the annotation of the unknown query sequences to the known references. To learn more about the algorithm I described above, I have written a short document outlining my inner thoughts, as well as a curt teaching of basic biology for those not well versed in the subject matter (this problem was given to my mathematical friends, hence the biology tutorial), found here: <a href="RBM_Problem.pdf">RBM Problem</a>. I would like to personally thank <a href="https://ca.linkedin.com/in/daniel-anania-277a9492">Daniel Anania</a> for his contribution in integer programming.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <a href="#">
+          <div class="sidebar_title">
+            <h3>RBM.py</h3>
+          </div>
+        </a>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="../index.html">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on December 2017</p>
+    <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>

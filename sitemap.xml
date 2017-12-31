@@ -5,49 +5,69 @@
   <!-- Main -->
   <url>
     <loc>https://matthewpreston.github.io/</loc>
-    <lastmod>2016-08-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/about.html</loc>
-    <lastmod>2016-08-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
   	<loc>https://matthewpreston.github.io/programs/index.html</loc>
-  	<lastmod>2016-12-29</lastmod>
+  	<lastmod>2017-12-31</lastmod>
   	<changefreq>monthly</changefreq>
   </url>
   <!-- Programs -->
   <url>
     <loc>https://matthewpreston.github.io/programs/Mega/index.html</loc>
-    <lastmod>2016-12-22</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/ScheduleACreater/index.html</loc>
-    <lastmod>2016-08-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Matrix/index.html</loc>
-    <lastmod>2016-08-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Cron/index.html</loc>
-    <lastmod>2016-12-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Electrophoresis/index.html</loc>
-    <lastmod>2016-12-22</lastmod>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://matthewpreston.github.io/programs/Make/index.html</loc>
-    <lastmod>2016-12-31</lastmod>
+    <lastmod>2017-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://matthewpreston.github.io/programs/AnnotateContigs/index.html</loc>
+    <lastmod>2017-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://matthewpreston.github.io/programs/CreateBlastDB/index.html</loc>
+    <lastmod>2017-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://matthewpreston.github.io/programs/HappyBirthday/index.html</loc>
+    <lastmod>2017-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://matthewpreston.github.io/programs/RBM/index.html</loc>
+    <lastmod>2017-12-31</lastmod>
     <changefreq>yearly</changefreq>
   </url>
 </urlset>

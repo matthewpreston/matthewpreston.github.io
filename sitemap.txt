@@ -7,3 +7,7 @@ https://matthewpreston.github.io/programs/Matrix/index.html
 https://matthewpreston.github.io/programs/Cron/index.html
 https://matthewpreston.github.io/programs/Electrophoresis/index.html
 https://matthewpreston.github.io/programs/Make/index.html
+https://matthewpreston.github.io/programs/AnnotateContigs/index.html
+https://matthewpreston.github.io/programs/CreateBlastDB/index.html
+https://matthewpreston.github.io/programs/HappyBirthday/index.html
+https://matthewpreston.github.io/programs/RBM/index.html

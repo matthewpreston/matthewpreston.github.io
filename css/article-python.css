@@ -6,6 +6,10 @@ body {
 }
 article .title {
   background-color: #4aa02c;
+  //background-image: url("../img/Python Logo.svg");
+  //background-position: 75% 0%;
+  //background-repeat: no-repeat;
+  //background-size: contain;
   color: #ffffff;
 }
 article .small-divider {

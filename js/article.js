@@ -1,4 +1,6 @@
-$(document).ready(function() {
+var MINIMIZED_MAX_CODE_LINES = 10;
+
+$(function() {
 	var $window = $(window);
 	var $navbar = $(".navbar");
 	var $wrapper = $(".wrapper");
@@ -39,10 +41,10 @@ $(document).ready(function() {
 			$topBtn.css("top", windowHeight - topBtnHeight - topBtnBorderWidth - btnOffset - wrapperPadBot);
 		}
 	}
-	stickySidebar();
+  stickySidebar();
 	$window.bind("scroll", stickySidebar);
 
-  //Fix sidebar while resizing
+	//Fix sidebar while resizing
 	function resizer() {
 		var articleTop = $article.position().top;
 		var asideTop = $aside.position().top;
@@ -57,7 +59,51 @@ $(document).ready(function() {
 			$topBtn.hide();
 		}
 	}
-	resizer();
+  resizer();
 	$window.bind("resize", resizer);
 
+	// Limit number of lines displayed by code blocks (i.e. no. of list items)
+	var codeBlocks = $.merge($(".program"), $(".terminal"));
+	$.each($(codeBlocks), function(index, elem) {
+		var listElems = $("li", elem);
+		if (listElems.length <= MINIMIZED_MAX_CODE_LINES) {
+			// Small block of code, thus hide the button
+			$(elem).find(".code-btn").css("display", "none")
+		} else {
+			// Larger block of code, thus hide excess code
+			$.each(listElems, function(index, elem) {
+				if (index >= MINIMIZED_MAX_CODE_LINES)
+					$(elem).addClass("display-none");
+			});
+		}
+	});
+
+	// Button controls whether to expand their respective code block to show
+	// all their list elements
+	$.each($(".code-btn"), function(index, elem) {
+		$(elem).click(function() {
+			var target = $(this).attr("data-target");
+			if ($(this).html() == "More") { // Display all list elements
+				$.each($(target), function(index, elem) {
+					$.each($("li", elem), function(index, elem) {
+							$(elem).removeClass("display-none");
+					});
+				});
+				$(this).html("Less");
+			} else { // Hide overflowing list elements
+				$.each($(target), function(index, elem) {
+					$.each($("li", elem), function(index, elem) {
+						if (index >= MINIMIZED_MAX_CODE_LINES)
+							$(elem).addClass("display-none");
+					});
+				});
+				$(this).html("More");
+			}
+			stickySidebar();	// To fix sidebar when text becomes hidden/unhidden
+		});
+	});
+
+	// Fire off functions to fix layout upon user loading page
+	stickySidebar();
+	resizer();
 });

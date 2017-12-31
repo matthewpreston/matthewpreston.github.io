@@ -7,7 +7,7 @@
   <meta name="author" content="Matthew Preston">
   <meta name="description" content="">
 
-  <title>Matrix.cpp, A Linear Algebra Tool</title>
+  <title>Matrix.cpp - A Linear Algebra Tool</title>
 
   <!--CSS-->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -82,16 +82,13 @@
             <table>
               <tr>
                 <td>
-                  <a href="Matrix.exe" title="Download Matrix.exe" class="button"><span class="glyphicon glyphicon-download-alt"></span> Matrix.exe</a>
+                  <a href="Matrix.zip" title="Download Matrix.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.zip</a>
                 </td>
                 <td>
-                  <a href="MatrixV1.0.zip" title="Download Matrix.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.zip</a>
+                  <a href="Matrix.tar.gz" title="Download Matrix.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.tar.gz</a>
                 </td>
                 <td>
-                  <a href="MatrixV1.0.tar.gz" title="Download Matrix.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Matrix.tar.gz</a>
-                </td>
-                <td>
-                  <a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs/Matrix" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a>
+                  <a href="https://github.com/matthewpreston/Matrix" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a>
                 </td>
               </tr>
             </table>
@@ -119,14 +116,11 @@
               </tr>
             </table>
             <p>&emsp;&emsp;&emsp;If you're wondering why I took the coefficients of the unknowns, I only needed to get the null space of that matrix to produce the *spoiler* infinite solutions needed. Then to get an answer for the linear system, take some linear combination of the basis vectors of the newly found null space and add it to an augmented solution vector. I'll show you what I mean later. Now run the program as so:</p>
-            <div class="terminal">
-              <ol>
+            <div class="code terminal">
+              <ol id="matrix">
                 <li><span class="prompt"></span>Matrix.exe test.txt output.txt</li>
-                <li></li>
-                <li><span class="prompt"></span></li>
-                <li></li>
-                <li></li>
               </ol>
+              <div class="code-btn" data-target="#matrix">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Open the conveniently named output file (change the 2nd parameter if you want something different) and you will see the original matrix, the row reduced matrix, and the four fundamental subspaces. Mind the messy fraction parts and lack of any ASCII art to make this any bit palatable; I may remake this for a web browser for aesthetics. The nicety however is all entries are stated in fractional form, so if there is some rational number, it won't show up as some ugly decimal number (although it itself isn't quite the looker either).</p>
             <table>
@@ -173,7 +167,7 @@
 
   <!--Footer-->
   <footer class="container-fluid">
-    <p>Updated on December 2016</p>
+    <p>Updated on December 2017</p>
     <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
   </footer>
 

@@ -7,7 +7,7 @@
   <meta name="author" content="Matthew Preston">
   <meta name="description" content="">
 
-  <title>Mega.py Alignment Viewer</title>
+  <title>Mega.py - Alignment Viewer</title>
 
   <!--CSS-->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -61,7 +61,7 @@
           <div class="container-fluid" id="introduction">
             <h3>Introduction</h3>
             <div class="divider"></div>
-            <p>&emsp;&emsp;&emsp;Written in Python, Mega.py is a complement to the popular aligner Mega(link). While Mega has a plethora of other varying functions (Muscle and ClustalW alignment algorithms, phylogeny construction, calculating evolutionary rates, etc.), this script solely focuses on displaying DNA and protein alignments in an user friendly manner. The motivation to write this program was to manage DNA ambiguity characters when translating to amino acid residues, which Mega cannot handle. The convenience of this allows the user to effortlessly visualize the resulting protein sequence to make inferences on its overall function or go back and decipher the intended nitrogenous base.</p>
+            <p>&emsp;&emsp;&emsp;Written in Python, Mega.py is a complement to the popular aligner <a href="http://www.megasoftware.net/">Mega</a>. While Mega has a plethora of other varying functions (Muscle and ClustalW alignment algorithms, phylogeny construction, calculating evolutionary rates, etc.), this script solely focuses on displaying DNA and protein alignments in an user friendly manner. The motivation to write this program was to manage DNA ambiguity characters when translating to amino acid residues, which Mega cannot handle. The convenience of this allows the user to effortlessly visualize the resulting protein sequence to make inferences on its overall function or go back and decipher the intended nitrogenous base.</p>
           </div>
           <!--Features-->
           <div class="container-fluid" id="features">
@@ -88,9 +88,9 @@
             <div class="divider"></div>
             <table>
               <tr>
-                <td><a href="MegaV1.0.zip" title="Download Mega.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Mega.zip</a></td>
-                <td><a href="MegaV1.0.tar.gz" title="Download Mega.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Mega.tar.gz</a></td>
-                <td><a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs/Mega" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+                <td><a href="Mega.zip" title="Download Mega.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Mega.zip</a></td>
+                <td><a href="Mega.tar.gz" title="Download Mega.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Mega.tar.gz</a></td>
+                <td><a href="https://github.com/matthewpreston/Mega" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
               </tr>
             </table>
           </div>
@@ -98,8 +98,8 @@
             <h3>Dependencies</h3>
             <div class="divider"></div>
             <ul>
-              <li><a href="#">BioPython</a> - For bioinformatical work</li>
-              <li><a href="#">xlsxwriter</a> - Allows integration with Microsoft Excel</li>
+              <li><a href="http://biopython.org/">BioPython</a> - For bioinformatical work</li>
+              <li><a href="http://xlsxwriter.readthedocs.io/">xlsxwriter</a> - Allows integration with Microsoft Excel</li>
             </ul>
           </div>
           <!--Usage/Demonstration-->
@@ -107,17 +107,17 @@
             <h3>Demonstration</h3>
             <div class="divider"></div>
             <p>&emsp;&emsp;&emsp;For the bioinformatics project I was working on, I needed to compare the outputs between three guided assemblers: <a href="http://bio-bwa.sourceforge.net/">BWA</a>, <a href="https://github.com/Cibiv/NextGenMap/wiki">NGM</a>, &amp; <a href="http://www.well.ox.ac.uk/project-stampy">STAMPY</a> and three de novo assemblers: <a href="http://soap.genomics.org.cn/SOAPdenovo-Trans.html">SOAPdenovo-Trans</a>, <a href="https://github.com/trinityrnaseq/trinityrnaseq/wiki">Trinity</a>, &amp; <a href="https://www.ebi.ac.uk/~zerbino/velvet/">Velvet</a>. All were used to recreate the exome for 160 different genes, but now I wanted to compare these results to both a reference genome and with each other. Since they were grouped by assembler, I wrote some primer scripts in order to regroup them by individual genes. <a href="RiffleFasta.py">RiffleFasta.py</a> would be used for transposing the assembler grouping to gene symbol.</p>
-            <div class="terminal">
-              <ol>
-                <li><span class="prompt">#Group by genes instead of by assembler</span></li>
+            <div class="code terminal">
+              <ol id="mega">
+                <li><span class="prompt"></span>#Group by genes instead of by assembler</li>
                 <li><span class="prompt"></span>mkdir Genes</li>
                 <li><span class="prompt"></span>python RiffleFasta.py Genes Data/{Anolis_Ref,BWA,NGM,STAMPY,SOAP,Trinity,Velvet}.fasta</li>
                 <li><span class="prompt"></span></li>
-                <li><span class="prompt">#Create Excel alignments</span></li>
+                <li><span class="prompt"></span>#Create Excel alignments</li>
                 <li><span class="prompt"></span>mkdir Alignments</li>
                 <li><span class="prompt"></span>python Mega.py -o Genes/Anolis $(ls Genes/*.fasta)</li>
-                <li><span class="prompt"></span></li>
               </ol>
+              <div class="code-btn" data-target="#mega">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Finally, I used Mega.py to create 16 Excel files, each containing 10 different alignments. From this, I could easily see that the gap regions shared between all assemblers was due to poor capture efficiency of the enrichment probes used. More interestingly, I learned that STAMPY tended to follow the sequence of the reference genome during reconstruction, leading to numerous nonsensical ambiguities when viewing the protein alignments. Also noteworthy was that none of the assemblers were a clear winner in stitching together contiguous sequences as some would be able to recover areas which others would leave blank. Thus the use of all six (or more) in tandem could be used to create an effective consensus sequence, if one has the sheer computing power and free time (conveniently I have nothing better to do). Check out an example output file: <a href="Cemophora_RSO6ex4_19_LRAT_to_NEUR3.xlsx">Example.xlsx</a>.</p>
             <table>
@@ -159,7 +159,7 @@
 
   <!--Footer-->
   <footer class="container-fluid">
-    <p>Updated on December 2016</p>
+    <p>Updated on December 2017</p>
     <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
   </footer>
 

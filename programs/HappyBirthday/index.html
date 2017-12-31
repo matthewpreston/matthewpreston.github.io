@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Matthew Preston">
+  <meta name="description" content="">
+
+  <title>HappyBirthday.sh - Wishing Happy Birthdays Autonomously</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/octicons.min.css">
+  <link rel="stylesheet" href="../../css/article.css">
+  <link rel="stylesheet" href="../../css/article-bash.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#spy-target" data-offset="60">
+  <!--Navbar-->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">Matt Preston</a>
+      </div>
+      <div class="collapse navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../index.html">Programs</a></li>
+          <li><a href="../../Resume_Matthew_Preston.pdf" target="_blank">Resume</a></li>
+          <li><a href="../../about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row wrapper">
+    <!--Main container-->
+    <article class="col-sm-9">
+      <!--Title-->
+      <div class="title">
+        <h1>HappyBirthday.sh</h1>
+        <div class="small-divider"></div>
+        <h4>Wishing Happy Birthdays Autonomously</h4>
+      </div>
+      <!--Create double border effect-->
+      <div class="outer-border">
+        <div class="inner-border">
+          <!--Presentation Image-->
+          <div class="main-img">
+            <a href="../../img/HappyBirthday.png"><img src="../../img/HappyBirthday.png" alt="Happy Birthday!!!"></a>
+          </div>
+          <!--Introduction-->
+          <div class="container-fluid" id="introduction">
+            <h3>Introduction</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Ever wanted to wish your friends and family a happy birthday, but accidentally forget the date? They might be okay with a belated email - but would you be satisfied? Fret no further, because this little script will be churning out birthday greetings at a steady rate of one per year for all your loved ones (and those you tolerate but prefer to be on their good side).</p>
+          </div>
+          <!--Features-->
+          <div class="container-fluid" id="features">
+            <h3>Features</h3>
+            <div class="divider"></div>
+            <ul>
+              <li>Supports simple plain-text for homely wishes and HTML for extravagantly designed birthday bashes.</li>
+              <li>Images, gifs, and other forms of media can be embedded (kind of) for aesthetic appeal.</li>
+              <li>Allows for personalization of emails such as greeting by first names and using specific images to be utilized.</li>
+              <li>Designed to be set up as a <a href="../Cron/index.html">cron</a> job for effortless greetings.</li>
+            </ul>
+          </div>
+          <!--Download/Github/Dependencies-->
+          <div class="container-fluid" id="download">
+            <h3>Download</h3>
+            <div class="divider"></div>
+            <table>
+              <tr>
+                <td><a href="HappyBirthday.zip" title="Download HappyBirthday.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> HappyBirthday.zip</a></td>
+                <td><a href="HappyBirthday.tar.gz" title="Download HappyBirthday.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> HappyBirthday.tar.gz</a></td>
+                <td><a href="https://github.com/matthewpreston/HappyBirthdayV2.0" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="container-fluid" id="dependencies">
+            <h3>Dependencies</h3>
+            <div class="divider"></div>
+            <ul>
+              <li><a href="https://www.sendmail.org/~ca/email/man/sendmail.html">sendmail</a>/<a href="https://linux.die.net/man/1/mailx">mailx</a>/<a href="http://www.mutt.org/">mutt</a> - For sending mail via the command line</li>
+              <li><a href="https://www.sqlite.org/">SQLite3</a> (Recommended) - For database management without using a SQL server</li>
+            </ul>
+          </div>
+          <!--Usage/Demonstration-->
+          <div class="container-fluid" id="demonstration">
+            <h3>Demonstration</h3>
+            <div class="divider"></div>
+            <p>&emsp;&emsp;&emsp;Ever since I learned about setting up scripts to be run autonomously using the <a href="../Cron/index.html">cron</a> daemon, I immediately wanted a script to send happy birthday emails to my friends. So that's what I did. It only supported a plain-text file and everyone received the same email, but it worked like a charm. Only during the following year when a person was to be sent that same email twice did I decide to upgrade. Thus, this is what I came up with.</p>
+            <table>
+              <tr>
+                <th><a href="../../img/PlainTextEmail.png"><img src="../../img/PlainTextEmail.png" alt="Plain-text email"></a></th>
+                <th><a href="../../img/HTMLEmail.png"><img src="../../img/HTMLEmail.png" alt="HTML email"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">Plain-old plain-text</td>
+                <td class="table-title">Hip HTML</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;However, with another year's worth of programming expertise, I wanted to up the ante. Personalization was the goal - the ability to have happy birthday emails differ based on the recipient. For example, I wanted my lab coworkers to get a somewhat research themed email versus my friends which I could include some dank NSFW content (or SFW if I so desire). I decided to use a <a href="https://en.wikipedia.org/wiki/SQL">SQL</a> backend to handle more complicated personalization cases. <a href="https://www.sqlite.org/">SQLite3</a> was a tool I used recently at the time and I was quite impressed that an active server was unnecessary to utilize it. You may believe that increased computational time is its detriment but for this script, only a few tables of non-big data sizes are required; thus, this is a non-issue.</p>
+            <p>&emsp;&emsp;&emsp;To begin, let's setup some emails to use. Once again, you can use a flat text file or HTML. The latter allows you to link images, gifs, etc. Orchestrate the HTML as you would normally, but for the <em>src</em> attributes within <em>img</em> tags, let the source be <strong>cid:NAME</strong>, where one substitutes the placeholder <strong>NAME</strong> with a more suitable phrase. Then, when constructing the SQL database, this <strong>NAME</strong> will be associated with some object which holds the actual location of the media. Thus, upon execution of the main script, all of these cid's will be replaced with their respective URLs. This is a level of personalization as a particular person can recieve an email with photos tailored towards them.</p>
+            <p>&emsp;&emsp;&emsp;Once those beautiful emails have been transcribed, we add these to our database, as well as the recipients of said emails, their birth dates, URLs of images, etc. The only finicky detail is how to initialize such a database and maintain it without a server continuously running. Thus, I came up with <a href="https://github.com/matthewpreston/HappyBirthdayV2.0/blob/master/instantiateBDays.sh">instantiateDB.sh</a>, which when run will create a target database for <a href="https://github.com/matthewpreston/HappyBirthdayV2.0/blob/master/birthday.sh">birthday.sh</a> to extract details from. One can easily hand-edit the former script and execute it for updating information. A bit annoying without a GUI, but it should suffice. Note that for this part, one should be a bit familiar with adding entries into a SQL database, but hopefully the examples provided should be somewhat explanatory. For further help, I've drafted a crude ER diagram showing how each table is linked to one another.</p>
+            <table>
+              <tr>
+                <th><a href="../../img/HappyBirthdayER.svg"><img src="../../img/HappyBirthdayER.svg" alt="ER diagram"></a></th>
+                <th><a href="../../img/BirthdayCronTable.png"><img src="../../img/BirthdayCronTable.png" alt="Installation into cron table"></a></th>
+              </tr>
+              <tr>
+                <td class="table-title">Personalization roadmap</td>
+                <td class="table-title">Last step before kicking up your feet</td>
+              </tr>
+            </table>
+            <p>&emsp;&emsp;&emsp;When everything is set up, test out the <a href="https://github.com/matthewpreston/HappyBirthdayV2.0/blob/master/birthday.sh">birthday.sh</a> script using your email as the recipient as to see if it is suitable (and pray that your email browser isn't malicious and massacres your meticulous layout). If you used HTML, check out <a href="http://help.verticalresponse.com/how-to/tutorial/the_dos_and_donts_of_email_html/">this guide</a> which helps iron out some pernicious problems perpetuated with particular email projection providers. When satisfied with your hard work, try adding the script as a cron job (tutorial <a href="../Cron/index.html">here</a>) and set the execution time a minute from now as a secondary test. If all looks well, re-edit the job to execute at a convenient time everyday. Now we're done! Enjoy your autonomous happy birthday greetings!</p>
+            <p>&emsp;&emsp;&emsp;A little aside note on embedding images in emails. You technically still can embed raw image data within emails (encoded in base64) using the <a href="https://tools.ietf.org/html/rfc2392">cid method</a>, but as I found out the hard way, this is not supported on all email browsers. In particular, Microsoft Outlook will briefly display a broken image link before making it disappear all together (with good ole display:none). Supposedly, this is used for spam emails that clog themselves with flashy advertisements. It also discourages embedding as a practice since inserting raw image data leads to a larger payload and expends more bandwidth, which afaik, isn't cached. I still keep the vestigial cid as an homage to the strenous research that I conducted to send a god forsaken email with embedded images via Unix's sendmail. Believe me, when you've landed yourself looking at a 1970's manual on a forgotten IBM webpage attempting to elucidate the syntax for boundaries and MIME-type declarations, you've gone too far Alice.&lt;/rant&gt;</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--Sidebar-->
+    <aside class="col-sm-3">
+      <div class="sidebar" id="spy-target">
+        <a href="#">
+          <div class="sidebar_title">
+            <h3>Happy Birthday.sh</h3>
+          </div>
+        </a>
+        <div class="divider"></div>
+        <ul class="nav nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#demonstration">Demonstration</a></li>
+        </ul>
+      </div>
+      <div class="button" id="all-programs">
+        <a href="../index.html">All Programs</a>
+      </div>
+      <div class="round-button" id="top">
+        <a href="#">Top</a>
+      </div>
+    </aside>
+  </div>
+
+  <!--Footer-->
+  <footer class="container-fluid">
+    <p>Updated on December 2017</p>
+    <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
+  </footer>
+
+  <!--JQuery-->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/article.js"></script>
+</body>
+</html>

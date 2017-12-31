@@ -7,7 +7,7 @@
   <meta name="author" content="Matthew Preston">
   <meta name="description" content="">
 
-  <title>Makefile Tutorial, For Repeated Compilation</title>
+  <title>Makefile Tutorial - For Repeated Compilation</title>
 
   <!--CSS-->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -92,8 +92,8 @@
             <h3>Demonstration</h3>
             <div class="divider"></div>
             <p>&emsp;&emsp;&emsp;Let's start with a 'dead' simple program which we wish to compile:</p>
-            <div class="code" title="main.cpp">
-              <ol>
+            <div class="code program" title="main.cpp">
+              <ol id="main-cppV1-0">
                 <li><span class="operator">#include &lt;iostream&gt;</span></li>
                 <li></li>
                 <li><span class="type">int</span> main<span class="keyword">(</span><span class="type">int</span> argc<span class="keyword">,</span> <span class="type">char</span> <span class="keyword">*</span>argv<span class="keyword">[]) {</span></li>
@@ -101,20 +101,22 @@
                 <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> <span class="num">0</span><span class="keyword">;</span></li>
                 <li><span class="keyword">}</span></li>
               </ol>
+              <div class="code-btn" data-target="#main-cppV1-0">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Typically we'd run: <strong>g++ -o Example.exe main.cpp</strong> to get our desired executable. But let's plan for the future as this is will be an expanding example. To run our <strong>make</strong> command, we need a target "Makefile". So let's make one (pun possibly intended):</p>
-            <div class="code" title="Makefile">
-              <ol>
+            <div class="code program" title="Makefile">
+              <ol id="makefileV1-0">
                 <li><span class="comment"># Makefile for our example program (this is a comment)</span></li>
                 <li><span class="comment"># V1.0
                 <li></li>
                 <li><span class="var">Example.exe</span>:</li>
                 <li>&emsp;&emsp;&emsp;&emsp;g++ -o Example.exe main.cpp</li>
+                <div class="code-btn" data-target="#makefileV1-0">More</div>
               </ol>
             </div>
             <p>&emsp;&emsp;&emsp;Now type <strong>make</strong> and presto. Makefiles are essentially recipes to create a certain object which can be object files (.o), library files (.dll), or the final executable(s) (.exe). In our case, we had one recipe, to make "Example.exe" and to create it, we run <strong>g++ -o Example.exe main.cpp</strong>. Try running <strong>make</strong> again. It should say that everything is up to date. Change the source file subtly and calling our one word command again results in a new compiliation. This will be important later. Let's add to this example to further our understanding. Since we're (I'm) writing this in C++, let's add a header file with an accompanying source file. Firstly, here's the new source and header files, "Parrot.hpp" (I wonder what it could do?!?), "Parrot.cpp" and the new "main.cpp":</p>
-            <div class="code" title="Parrot.hpp">
-              <ol>
+            <div class="code program" title="Parrot.hpp">
+              <ol id="parrot-hppV1-1">
                 <li><span class="operator">#ifndef PARROT_H</span></li>
                 <li><span class="operator">#define PARROT_H</span></li>
                 <li></li>
@@ -133,9 +135,10 @@
                 <li></li>
                 <li><span class="operator">#endif</span></li>
               </ol>
+              <div class="code-btn" data-target="#parrot-hppV1-1">More</div>
             </div>
-            <div class="code" title="Parrot.cpp">
-              <ol>
+            <div class="code program" title="Parrot.cpp">
+              <ol id="parrot-cppV1-1">
                 <li><span class="operator">#include &lt;ostream&gt;</span></li>
                 <li><span class="operator">#include &lt;string&gt;</span></li>
                 <li><span class="operator">#include "Parrot.hpp"</span></li>
@@ -145,9 +148,10 @@
                 <li>&emsp;&emsp;&emsp;&emsp;os <span class="keyword">&lt;&lt;</span> phrase <span class="keyword">&lt;&lt;</span> std<span class="keyword">::</span>endl<span class="keyword">;</span></li>
                 <li><span class="keyword">}</span></li>
               </ol>
+              <div class="code-btn" data-target="#parrot-cppV1-1">More</div>
             </div>
-            <div class="code" title="main.cpp">
-              <ol>
+            <div class="code program" title="main.cpp">
+              <ol id="main-cppV1-1">
                 <li><span class="operator">#include &lt;iostream&gt;</span></li>
                 <li><span class="operator">#include "Parrot.hpp"</span></li>
                 <li></li>
@@ -157,10 +161,11 @@
                 <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">return</span> <span class="num">0</span><span class="keyword">;</span></li>
                 <li><span class="keyword">}</span></li>
               </ol>
+              <div class="code-btn" data-target="#main-cppV1-1">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Now back to our "Makefile":</p>
-            <div class="code" title="Makefile">
-              <ol>
+            <div class="code program" title="Makefile">
+              <ol id="makefileV1-1">
                 <li><span class="comment"># Makefile for our example program</span></li>
                 <li><span class="comment"># V1.1
                 <li></li>
@@ -178,10 +183,11 @@
                 <li><span class="var">clean</span>:</li>
                 <li>&emsp;&emsp;&emsp;&emsp;rm -f Example.exe main.o Parrot.o</li>
               </ol>
+              <div class="code-btn" data-target="#makefileV1-1">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Jesus H. Christ slow down! Let's go through it bit by bit. Our original "Example.exe" recipe now has two dependencies: "main.o" and "Parrot.o", and the g++ command has adapted to these object files. But how do we make these dependencies? Just add another recipe! So there's one for "main.o" and "Parrot.o" from their respective source files. Let's ignore the ".PHONY" for the time being and move onto "clean". This recipe will remove the previous files that were created, allowing for a fresh start. When in doubt, call <strong>make clean</strong> to begin anew. This begs a question, if we can write <strong>make clean</strong>, then could we write <strong>make Example.exe</strong>? Indeed. You can choose which recipes you wish to follow if you desire. But as seen previously, if you make an edit in one of the files, <strong>make</strong> will compile those files that have changed, while leaving those that are up to date untouched. Very good. But this is actually quite verbose for a "Makefile" and can be shortened quite a bit. Take 3!</p>
-            <div class="code" title="Makefile">
-              <ol>
+            <div class="code program" title="Makefile">
+              <ol id="makefileV1-2">
                 <li><span class="comment"># Makefile for our example program</span></li>
                 <li><span class="comment"># V1.2
                 <li></li>
@@ -198,10 +204,11 @@
                 <li><span class="var">clean</span>:</li>
                 <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(RM)</span> Example.exe <span class="keyword">$(OBJECTS)</span></li>
               </ol>
+              <div class="code-btn" data-target="#makefileV1-2">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;We now introduce variables into the mix. We list the dependencies of "Example.exe" as a variable, which is previously initialized to all our desired object files. Additionally we added "$(CXX)" to allow our user to change up the compiler if they really want to (most likely not). Instead of explicitly writing in "Example.exe" after the -o flag, we can write "$@" which refers to the name of the recipe, namely "Example.exe". Savings. Finally in our "clean" recipe, we have a "$(RM)", which would expand to "rm -f". But what's with the lack of instructions with our object files? Don't we need those? Actually <strong>make</strong> is smart. It assumes (correctly) that you're going to call <strong>$(CXX) -c main.cpp</strong> and so forth. So why bother to write it? This reduces clutter, allowing one to see easily just the dependencies for each object file. For simple programs, this format should suffice. But for a more complicated architecture, you'd want to pass some more flags into our compiler. So let's explore that. This next bit uses <a href="http://www.boost.org/">Boost</a>, which expands C++'s paultry library. Ah its one major downside. Anyways, I'll be using the <a href="http://www.boost.org/doc/libs/1_63_0/doc/html/program_options.html">Program Options</a> and <a href="http://www.boost.org/doc/libs/1_63_0/libs/filesystem/doc/index.htm">Filesystem</a> libraries as to add some nice command line support. Here's the revised "main.cpp" for reference (don't bother to understand, just note the include's):</p>
-            <div class="code" title="main.cpp">
-              <ol>
+            <div class="code program" title="main.cpp">
+              <ol id="main-cppV1-3">
                 <li><span class="operator">#include &lt;iostream&gt;</span></li>
                 <li><span class="operator">#include &lt;string&gt;</span></li>
                 <li><span class="operator">#include &lt;vector&gt;</span></li>
@@ -298,10 +305,11 @@
                 <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">}</span></li>
                 <li><span class="keyword">}</span></li>
               </ol>
+              <div class="code-btn" data-target="#main-cppV1-3">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Kinda overkill just to add one option (whether to parrot to STDOUT or STDERR) and one positional argument (what phrase we want to parrot). To be honest, don't worry about understanding any of it; it's just meddling with syntax. But one question remains. How do we compile it? Boost requires the use of a dynamically linked library (.dll) on Windows systems or a shared object (.so) on MacOS(?) or Linux platforms. So this will require the -l flag. IMPORTANT NOTE: Remember when using the -l flag to remove the starting "lib" part and the extension (i.e. libboost_program_options.so -> boost_program_options). But where can we find this file? You may have to a bit of searching (like I did). I personally found mine at "/usr/lib/x86_64-linux-gnu" on a Ubuntu 64 bit machine but yours may be different (and your users).</p>
-            <div class="code" title="Makefile">
-              <ol>
+            <div class="code program" title="Makefile">
+              <ol id="makefileV1-3">
                 <li><span class="comment"># Makefile for our example program</span></li>
                 <li><span class="comment"># V1.3
                 <li></li>
@@ -325,10 +333,11 @@
                 <li><span class="var">clean</span>:</li>
                 <li>&emsp;&emsp;&emsp;&emsp;<span class="keyword">$(RM)</span> Example.exe <span class="keyword">$(OBJECTS)</span></li>
               </ol>
+              <div class="code-btn" data-target="#makefileV1-3">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;We add some additional flags to be passed by "$(CXX)", namely those in "$(CXXFLAGS)" and "$(LDFLAGS)". We allow for debugging (using -g which can be switched off by leaving "DEBUG" blank), to witness all warnings (using -Wall), to show where the location of where our .so files are (using -L), and the library files themselves (using -l, sneaky boost/filesystem.hpp requires both libboost_filesystem.so and libboost_system.so). IMPORTANT NOTE: the "$(LDFLAGS)" must as the last argument for "$(CXX)" or else you'll get an error... took me too long to find this one out! So where's "$(CXXFLAGS)" in this compilation command? Well <strong>make</strong> has a slew of default variables that it uses implicitly (see <a href="https://www.gnu.org/software/make/manual/make.html#Implicit-Variables">Implicit Variable Rules</a> for too much info). If you do run this Makefile, you'll see the -Wall and -g flags are indeed used. The new "all" recipe is meant to be for projects with multiple executables, but we only have one sadly. When you run <strong>make</strong>, it is actually <strong>make all</strong> so you don't need to type the extra noun. Finally let's address ".PHONY". If you're extremely observant (maybe even more than Holmes), all our recipes had names that became a file. For example, the recipe "main.o" was created through the compilation of "main.cpp" into an object file. This is not a coincidence, but an integral part of <strong>make</strong>. The "clean" recipe does not create a file called "clean". So what happens if we had a file called "clean"? <strong>make</strong> would check the dependencies of the "clean" recipe, to which there are none, and conclude that the "clean" file is up to date. The instructions below would never execute and desired programs/object files would not be deleted. Oh dear. However, when we declare "clean" as a dependency to ".PHONY", this overrides the up-to-date-checking and allows its recipe to be conducted. To wrap up, here's a final overview of the commands and showcase of the program we've built:</p>
-            <div class="terminal">
-              <ol>
+            <div class="code terminal">
+              <ol id="parrot-test">
                 <li><span class="prompt"></span>make</li>
                 <li>g++ -Wall -g&emsp;&emsp;&emsp;-c -o main.o main.cpp</li>
                 <li>g++ -Wall -g&emsp;&emsp;&emsp;-c -o Parrot.o Parrot.cpp</li>
@@ -347,6 +356,7 @@
                 <li>rm -f Example.exe main.o Parrot.o</li>
                 <li><span class="prompt"></span></li>
               </ol>
+              <div class="code-btn" data-target="#parrot-test">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Hopefully this tutorial gave you enough insight into Makefiles in order to write one of your own. There is _much_ more to this utility, such as wildcard characters, conditional expressions, functions, etc. but I won't go into them (because I don't quite need that complexity for my needs just yet). If you're curious, take a gander: <a href="https://www.gnu.org/software/make/manual/make.html">Make Manual</a>.</p>
           </div>
@@ -380,7 +390,7 @@
 
   <!--Footer-->
   <footer class="container-fluid">
-    <p>Updated on December 2016</p>
+    <p>Updated on December 2017</p>
     <p>Thanks to Friends &amp; Family | <a href="../../about.html#inspirations">Insiprations</a></p>
   </footer>
 

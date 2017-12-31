@@ -1,3 +1,6 @@
+.display-none {
+  display: none;
+}
 a:link, a:hover, a:active, a:visited {
   color: inherit;
   text-decoration: none;
@@ -69,10 +72,16 @@ article .title h4 {
   border-style: solid;
   padding: 5px;
 }
-#demonstration p a{
+#dependencies a {
   color: #337ab7;
 }
-#demonstration p a:hover{
+#dependencies a:hover {
+  text-decoration: underline;
+}
+#demonstration p a {
+  color: #337ab7;
+}
+#demonstration p a:hover {
   text-decoration: underline;
 }
 #demonstration table {
@@ -110,12 +119,13 @@ article .title h4 {
   padding-left: 8px;
 }
 .prompt::before {
-  content: "user@bash:~ ";
+  content: "user@bash:~$ ";
 }
 .prompt {
+  color: #c5c4c2;
   font-weight: bold;
 }
-.code {
+.program {
   background-color: #f8f8f8;
   border: 2px solid #111111;
   border-radius: 5px;
@@ -123,7 +133,7 @@ article .title h4 {
   font-size: 14px;
   margin: 20px 20px;
 }
-.code::before {
+.program::before {
   content: attr(title);
   background-color: #e5e4e2;
   border-top-left-radius: 3px;
@@ -133,26 +143,35 @@ article .title h4 {
   margin-bottom: 0px;
   text-align: center;
 }
-.code .comment {
+.program .comment {
   color: #008000;
 }
-.code .keyword {
+.program .keyword {
   color: #0000ff;
 }
-.code .num {
+.program .num {
   color: #ff0000;
 }
-.code .operator {
+.program .operator {
   color: #7e3517;
 }
-.code .string {
+.program .string {
   color: #736f6e;
 }
-.code .type {
+.program .type {
   color: #571b7e;
 }
-.code .var {
+.program .var {
   color: #e56717;
+}
+.code-btn {
+  background-color: #b5b4b2;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+}
+.code-btn:hover {
+  background-color: #858482;
 }
 .sidebar {
   background-color: #f8f8f8;

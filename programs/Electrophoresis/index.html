@@ -7,7 +7,7 @@
   <meta name="author" content="Matthew Preston">
   <meta name="description" content="">
 
-  <title>Electrophoresis.R Molecular Weight Interpolation of Bands</title>
+  <title>Electrophoresis.R - Molecular Weight Interpolation of Bands</title>
 
   <!--CSS-->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -82,7 +82,7 @@
               <tr>
                 <td><a href="Electrophoresis.zip" title="Download Electrophoresis.zip" class="button"><span class="glyphicon glyphicon-compressed"></span> Electrophoresis.zip</a></td>
                 <td><a href="Electrophoresis.tar.gz" title="Download Electrophoresis.tar.gz" class="button"><span class="glyphicon glyphicon-compressed"></span> Electrophoresis.tar.gz</a></td>
-                <td><a href="https://github.com/matthewpreston/matthewpreston.github.io/tree/master/programs/Electrophoresis" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
+                <td><a href="https://github.com/matthewpreston/Electrophoresis" title="View on GitHub" class="button"><span class="octicon octicon-git-branch"></span>View on GitHub</a></td>
               </tr>
             </table>
           </div>
@@ -102,8 +102,8 @@
               </tr>
             </table>
             <p>&emsp;&emsp;&emsp;Firstly, take a look at the example input files. The first one, <a href="Examples/MolecularWeightLadder_RE.csv">MolecularWeightLadder_RE.csv</a>, is comma separated. Hopefully the header line should be informative enough with R<sub>f</sub> first, comma, and molecular weight. The second one, <a href="Examples/Lanes_RE.txt">Lanes_RE.txt</a> is somewhat comma delimited. First 'column' is what the lane contains (i.e. an appropriate label), followed by comma separated R<sub>f</sub> values. Run the script as follows:</p>
-            <div class="terminal">
-              <ol>
+            <div class="code terminal">
+              <ol id="electrophoresis">
                 <li><span class="prompt"></span>./Electrophoresis.R \</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;--main="Interpolation of Molecular Weights from Standard Molecular Weight Ladder on Agarose Gel" \</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;--subtitle="(0.7% gel, 150V, 60 minutes)" \</li>
@@ -112,9 +112,8 @@
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;--output="Molecular Weight Interpolation RE.png" \</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;MolecularWeightLadder_RE.csv \</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;Lanes_RE.txt</li>
-                <li></li>
-                <li><span class="prompt"></span></li>
               </ol>
+              <div class="code-btn" data-target="#electrophoresis">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;And presto! Notice that just using one restriction enzyme alone led to the same band, implying that there is either one or no sites to cleave at. This nicely shows up as a multicoloured line in the plot. Some other overlaps occur, such as the dark blue and pink line (EcoRI + AvaI and EcoRI + ScaI + AvaI respectively) at R<sub>f</sub> = ~0.72, meaning that this section of DNA was not cleaved by ScaI. If you're observant enough, you'd expect one more band in the EcoRI + ScaI digest (as well as in the triple digest), but this band was so small (and such a small concentration), it couldn't be visualized at ~300bp. Feel free to dig into the script if you don't like some of the graphical parameters. Hopefully I've commented enough to give a rough idea on what to change. Yell at me if need be.</p>
           </div>

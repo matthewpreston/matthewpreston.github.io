@@ -7,7 +7,7 @@
   <meta name="author" content="Matthew Preston">
   <meta name="description" content="">
 
-  <title>Cron Tutorial, For Time-Based Job-Scheduling</title>
+  <title>Cron Tutorial - For Time-Based Job-Scheduling</title>
 
   <!--CSS-->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -97,8 +97,8 @@
             <div class="divider"></div>
             <p>&emsp;&emsp;&emsp;A daemon is a background process which becomes active upon request. Because of this, daemons can take up very little processing power while being always ready. Now wouldn't it be useful if there existed a daemon which could execute a program, go to sleep for a specified amount of time, then repeat ad infinitum? Cron is a job scheduler written originally part of the Unix package, but now it has become standard in Linux distributions as well. Even Mac OS X utilizes cron, but launchd is preferred (and uses XML formatting). So installation on these operating systems shouldn't be necessary. But if you are a Windows/Cygwin user, check out: <a href="https://technet.microsoft.com/en-us/library/cc748993(v=ws.11).aspx">Windows Task Scheduler</a>(Win GUI), <a href="http://cronw.sourceforge.net/">cronw</a>(Win), or <a href="http://www.davidjnice.com/cygwin_cron_service.html">Vixie cron</a>(Cygwin). This tutorial will be using the terminal so be prepared. Let's get started.</p>
             <p>&emsp;&emsp;&emsp;Open up your terminal and type in <strong>crontab -e</strong>. If the command is not recognized, ensure cron is installed and that it is running (<strong>ps -e | grep cron</strong> should show something). At this point, if you've never set this up before, there will be a prompt to choose which text editor to use. If you're a pro and a masochist, use vim, else use the layman's nano which should be recommended. Now you'll see the glorious commented out help info.</p>
-            <div class="terminal">
-              <ol>
+            <div class="code terminal">
+              <ol id="new-crontab">
                 <li><span class="prompt"></span>crontab -e</li>
                 <li>no crontab for user - using an empty one</li>
                 <li></li>
@@ -107,8 +107,9 @@
                 <li>&nbsp;&nbsp;2.&nbsp;&nbsp;/bin/nano&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<---- easiest</li>
                 <li>&nbsp;&nbsp;3.&nbsp;&nbsp;/usr/bin/vim.basic</li>
                 <li>&nbsp;&nbsp;4.&nbsp;&nbsp;/usr/bin/vim.tiny</li>
-                <li>Choose 1-4 [2]: 2<li>
+                <li>Choose 1-4 [2]: 2</li>
               </ol>
+              <div class="code-btn" data-target="#new-crontab">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;Let's break it down. At the bottom of the help info is: "m h  dom mon dow   command". The instructions say what these are but here's for memory's sake.</p>
             <ul>
@@ -183,8 +184,8 @@
               </tr>
             </table>
             <p>&emsp;&emsp;&emsp;So now we're ready to add some commands to be run. Say for example you were interested in ensuring that your server wasn't overloaded, and you wish to be informed if this happened. This could indicate some attacker spamming requests which your lowly server cannot handle. Here's some code:</p>
-            <div class="code" title="LoadCheck.sh">
-              <ol>
+            <div class="code program" title="LoadCheck.sh">
+              <ol id="loadcheck">
                 <li><span class="comment">#!/bin/bash</span></li>
                 <li><span class="comment">#Used to see if load is above maximum threshold</span>
                 <li></li>
@@ -203,16 +204,18 @@
                 <li>&emsp;&emsp;<span class="keyword">done</span>
                 <li><span class="keyword">fi</span>
               </ol>
+              <div class="code-btn" data-target="#loadcheck">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;I personally used to make a temporary file to dump all the text just to have a local copy for reference (and to see if it works when something goes awry). You can remove it automatically if you'd like. Also if you didn't realize, when I write "/path/to/???/", you should put the location of where these files exist yourself. Let's add this to the cron table.</p>
-            <div class="terminal">
-              <ol>
+            <div class="code terminal">
+              <ol id="filled-crontab">
                 <li><span class="prompt"></span>crontab -e</li>
                 <li>#&nbsp;Edit this file to introduce tasks to be run by cron.</li>
                 <li>...</li>
                 <li>#&nbsp;m&nbsp;h&nbsp;&nbsp;dom&nbsp;mon&nbsp;dow&nbsp;&nbsp;&nbsp;command</li>
                 <li>*/15 * * * * bash /path/to/program/LoadCheck.sh</li>
               </ol>
+              <div class="code-btn" data-target="#filled-crontab">More</div>
             </div>
             <p>&emsp;&emsp;&emsp;If you're using nano, press CTRL+O then hit ENTER to write and CTRL+X to exit. And if you're using vim, you did this to yourself. Now we're done! Cron was made with the user in mind. As you can see what we wrote should execute every 15 minutes; of course you're free to change this to fit your personal whims. If you're curious to what other scripts I have my server unconsciously run, I wrote <a href="zombiejobs.sh">ZombiePrograms.sh</a> for checking 'zombie' jobs. They're not explicitly zombies (i.e. they don't show up as zombie when you run <strong>top</strong>), but seem to be stuck in a huge loop. And for bioinformatics people, there's <a href="UpdateBlastDB.tar.gz">UpdateBlastDB.sh</a> which you can use to run every day or every week.</p>
           </div>
