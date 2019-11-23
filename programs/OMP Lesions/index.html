@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>OMP Lesion</title>
+  <style>
+    a:visited {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Matt's Very Crude OMP Lesion Picker Page!</h1>
+  <p>Designed before I was told that there was: <a href="https://vmicroscopy.dentistry.utoronto.ca/random-slides.php?class=oral">https://vmicroscopy.dentistry.utoronto.ca/random-slides.php?class=oral</a>.</p>
+  <p>But this page can also give you the answer if you don't know what you're even looking at!</p>
+  <h2>Pick your favourite lesion!</h2>
+  <input id="input" onchange="getSelectedID()" placeholder="Give an ID number">
+  <button onclick="getRandomID()">Randomize!</button>
+
+  <p>Random slide: <a id="link"><b>Click Randomize!</b></a></p>
+  <p>Random slide with annotations: <a id="link2"><b>Click Randomize!</b></a></p>
+  <button onclick="getAnswer()">Answer:</button> <p id="answer"></p>
+
+  <script>
+    var ID = [
+      97,98,99,100,101,105,
+      124,125,126,127,128,129,130,131,
+      102,103,104,106,107,108,109,110,111,
+      112,113,114,117,118,123,
+      115,116,119,120,121,122,
+      132,133,134,135,136,137,
+      138,139,347,141,142,143,144,145,146,
+      147,148,150,153,154,155,
+      156,157,158,159,160,161,162,163,
+      164,165,166,167,168,169,170,
+      171,173,176,177,178,179,180,181
+    ];
+    var NAME = [
+      "Hypercementosis", "Periapical Abscess", "Periapical Granuloma", "Periapical Granuloma (Acute Exacerbation)", "Radicular Cyst", "Parulis",
+      "Fibrous Epulis", "Fibroepithelial Polyp", "Epulis Fissuratum", "Papilliferous Hyperplasia", "Hyperplastic Gingivitis", "Pyogenic Granuloma - Gingiva", "Pyogenic Granuloma - Tongue", "Peripheral Giant Cell Granuloma",
+      "Radicular Cyst", "Radicular Cyst", "Residual Cyst", "Dentigerous Cyst (Attached to CEJ)", "Dentigerous Cyst", "Odontogenic Keratocyst", "Inflamed Odontogenic Keratocyst", "Lateral Periodontal Cyst", "Calcifying Odontogenic Cyst",
+      "Nasopalatine Duct Cyst", "Lymphoepithelial Cyst", "Epidermoid Cyst", "Ameloblastoma", "Ameloblastoma", "Adenomatoid Odontogenic Tumour",
+      "Complex Odontome", "Compound Odontome", "Ameloblastic Fibroma", "Ameloblastic Fibro-odontoma", "Ameloblastic Fibro-odontoma", "Odontogenic Myxoma",
+      "Central Giant Cell Granuloma", "Langerhans Cell Histiocytosis", "Paget Disease", "Fibrous Dysplasia", "Periapical Cemental Dysplasia", "Focal Cemento-Osseous Dysplasia",
+      "Papilloma", "Papilloma", "Condyloma Acuminatum", "Compound Nevus", "Intramucosal Nevus", "Granular Cell Tumour", "Lipoma", "Schwannoma", "Osteoma",
+      "Malignant Melanoma", "Osteosarcoma", "Metastatic Adenocarcinoma", "Multiple Myeloma", "Lymphoma", "Leukaemic Gingivitis",
+      "Hyperkeratosis", "Lichen Planus", "Lichen Planus", "Pemphigus Vulgaris", "Mucous Membrane Pemphigoid", "Amalgam Tattoo", "Fordyce Granules", "Traumatic Ulcer",
+      "Hyperkeratosis with Moderate Dysplasia", "Severe Dysplasia", "Dysplasia Suspicious for Microinvasion", "Well-Differentiated Squamous Cell Carcinoma - Lip", "Well-Differentiated Squamous Cell Carcinoma - Tongue", "Poorly-Differentiated Squamous Cell Carcinoma - Tongue", "Verrucous Carcinoma",
+      "Chronic Sialdenitis", "Mucocele", "Pleomorphic Adenoma", "Pleomorphic Adenoma", "Warthin Tumour", "Muco-Epidermoid Carcinoma", "Adenoid Cystic Carcinoma", "Acinic Cell Carcinoma"
+    ];
+
+    function getRandomID() {
+      var randomID = ID[Math.floor(Math.random() * ID.length)];
+      document.getElementById("input").value = randomID;
+      document.getElementById("answer").innerHTML = "";
+
+      link = document.getElementById("link");
+      link.setAttribute("href", "https://vmicroscopy.dentistry.utoronto.ca/view-random-slide.php?id=" + randomID.toString());
+      link.innerHTML = "https://vmicroscopy.dentistry.utoronto.ca/view-random-slide.php?id=" + randomID.toString();
+      link.setAttribute("target", "_blank");
+
+      link2 = document.getElementById("link2");
+      link2.setAttribute("href", "https://vmicroscopy.dentistry.utoronto.ca/view-slide.php?id=" + randomID.toString());
+      link2.innerHTML = "https://vmicroscopy.dentistry.utoronto.ca/view-slide.php?id=" + randomID.toString();
+      link2.setAttribute("target", "_blank");
+    }
+
+    function getSelectedID() {
+      var inputID = Number(document.getElementById("input").value);
+      link = document.getElementById("link");
+      link2 = document.getElementById("link2");
+      document.getElementById("answer").innerHTML = "";
+
+      if (ID.includes(inputID)) {
+        link.setAttribute("href", "https://vmicroscopy.dentistry.utoronto.ca/view-random-slide.php?id=" + inputID.toString());
+        link.innerHTML = "https://vmicroscopy.dentistry.utoronto.ca/view-random-slide.php?id=" + inputID.toString();
+        link.setAttribute("target", "_blank");
+        
+        link2.setAttribute("href", "https://vmicroscopy.dentistry.utoronto.ca/view-slide.php?id=" + inputID.toString());
+        link2.innerHTML = "https://vmicroscopy.dentistry.utoronto.ca/view-slide.php?id=" + inputID.toString();
+        link2.setAttribute("target", "_blank");
+      } else {
+        link.removeAttribute("href");
+        link.innerHTML = "Invalid ID";
+        link.removeAttribute("target");
+        
+        link2.removeAttribute("href");
+        link2.innerHTML = "Invalid ID";
+        link2.removeAttribute("target");
+      }
+    }
+
+    function getAnswer() {
+      var index = ID.indexOf(Number(document.getElementById("input").value));
+      document.getElementById("answer").innerHTML = NAME[index];
+    }
+  </script>
+</body>
+</html>
